@@ -1,0 +1,682 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/19/2015 9:53:38 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="SQL0"
+  DTS:CreatorName="FILEX\scott.harris"
+  DTS:DTSID="{702427FC-9AA0-4CCC-A6B6-134D2A4AB7DE}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.5058.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="LoadStage"
+  DTS:PackageType="5"
+  DTS:VersionBuild="57"
+  DTS:VersionGUID="{19C2627F-8E83-44D8-8FD6-1DB3EC534A47}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[sql0.AppleStage]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{378EA0E1-2B7F-4E63-869A-92D60F93ED9A}"
+      DTS:ObjectName="sql0.AppleStage">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=sql0;Initial Catalog=AppleStage;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[sql0.TraxDW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{88FD9220-7C37-44B2-987A-D7421673D119}"
+      DTS:ObjectName="sql0.TraxDW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=sql0;Initial Catalog=TraxDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6436D016-D141-4EE6-B820-68CFC53F38A9}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Database">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{839FE57B-1225-43A5-B8F6-67DA016CC6F4}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="OwnerKey">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B44E322C-AA07-4956-B20B-EDDF9F722844}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SnapDB">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\All fbs pd"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{02CF7A4E-1DA6-4B49-B5E2-EE702F48D94F}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="All fbs pd"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{88FD9220-7C37-44B2-987A-D7421673D119}"
+          SQLTask:SqlStatementSource="insert into applestage.dbo.all_fbs_pd&#xA;select * from&#xA;(&#xA;select &#xA;&#x9;&#x9;'CDC' as FBType,&#xA;        p.[BOOKED DATE],&#xA;&#x9;&#x9;f.owner_key,&#xA;&#x9;&#x9;fe.business_unit,&#xA;&#x9;&#x9;i.bat_id,&#xA;&#x9;&#x9;f.inv_id,&#xA;&#x9;&#x9;f.inv_key,&#xA;&#x9;&#x9;f.fb_id,&#xA;&#x9;&#x9;fe.fbnid,&#xA;&#x9;&#x9;f.fb_key,&#xA;&#x9;&#x9;f.bol_num_key,&#xA;&#x9;&#x9;CASE&#x9;&#xA;&#x9;&#x9;&#x9;when p.pd_amt = 0.00 then 'Denied'&#xA;&#x9;&#x9;&#x9;else f.fb_stat&#xA;&#x9;&#x9;END as STATUS,&#xA;&#x9;&#x9;fe.curr_env,&#xA;&#x9;&#x9;i.vend_labl,&#xA;&#x9;&#x9;v.vend_name,&#xA;&#x9;&#x9;fbfl.mode,&#xA;&#x9;&#x9;fbfl.mode_type,&#xA;&#x9;&#x9;fbfl.srvc_req_code,&#xA;&#x9;&#x9;fbfl.vend_srvc_name,&#xA;&#x9;&#x9;fbfl.Acct_Num_Vend_Blng,&#xA;&#x9;&#x9;f.Acct_Num_Vend_Orig,&#xA;&#x9;&#x9;f.Acct_Num_Vend_Dest,&#xA;&#x9;&#x9;f.LOC_KEY_ORIG,&#xA;&#x9;&#x9;LEFT(f.AL_CITY_ORIG,5) &#xA;&#x9;&#x9;&#x9;+ LEFT(f.al_orig_1,4) &#xA;&#x9;&#x9;&#x9;+ LEFT(f.AL_ORIG_3,3)&#x9;AS [Orig_City5_Name4_Str3],&#xA;&#x9;&#x9;&#x9;--address NORM join from dnorm&#xA;&#x9;AL_ORIG_1,&#xA;&#x9;AL_ORIG_2, &#xA;&#x9;&#x9;f.AL_ORIG_3,&#xA;&#x9;&#x9;f.AL_ORIG_4,  &#xA;&#x9;AL_CITY_ORIG,&#xA;&#x9;AL_STATE_PROV_ORIG, &#xA;&#x9;AL_POST_CODE_Orig, &#xA;    AL_CNTRY_CODE_ORIG, &#xA;&#x9;&#x9;f.LOC_KEY_DEST,&#xA;&#x9;&#x9;LEFT(f.AL_CITY_Dest,5) &#xA;&#x9;&#x9;&#x9;+ LEFT(f.al_dest_1,4) &#xA;&#x9;&#x9;&#x9;+ LEFT(f.AL_dest_3,3)&#x9;AS [Dest_City5_Name4_Str3],&#xA;&#x9;AL_DEST_1,&#xA;&#x9;AL_DEST_2,&#xA;&#x9;&#x9;f.AL_DEST_3,&#xA;&#x9;&#x9;f.AL_DEST_4,&#xA;&#x9;AL_CITY_DEST,&#xA;&#x9;AL_STATE_PROV_DEST, &#xA;&#x9;AL_POST_CODE_DEST, &#xA;    AL_CNTRY_CODE_DEST,&#xA;&#x9;&#x9;fe.Port_Orig,&#xA;&#x9;&#x9;fe.Port_Dest,&#xA;&#x9;&#x9;f.vend_tariff,&#xA;        f.vend_rate_scale,&#xA;&#x9;&#x9;f.fb_currency_qual,&#xA;&#x9;&#x9;fbfl.fb_wt_qual,&#xA;&#x9;&#x9;f.fb_actual_Wt,&#xA;&#x9;&#x9;f.fb_fncl_wt,&#xA;&#x9;&#x9;f.FB_Dim_Wt,&#xA;&#x9;&#x9;f.lm_pkup_actual_dtm,&#xA;&#x9;&#x9;f.fb_due_dtm as OrigFbDueDtm,&#xA;&#x9;&#x9;f.fb_due_dtm,&#xA;&#x9;&#x9;f.fb_creat_dtm,&#xA;&#x9;&#x9;i.bat_creat_dtm as OrigBatCreatDtm,&#xA;&#x9;&#x9;i.bat_creat_dtm,&#xA;&#x9;&#x9;COALESCE(P.[RCRD_CREAT_DTM],CH.CREAT_DTM,p.APP_DTM) AS [PAID DTM],&#xA;&#x9;&#x9;f.FB_Amt,&#xA;&#x9;&#x9;f.FB_Amt* coalesce(c.tousd, cc.tousd) AS FbAmtUSD,&#xA;&#x9;&#x9;f.FB_Frght_Amt,&#xA;&#x9;&#x9;f.FB_Frght_Amt* coalesce(c.tousd, cc.tousd) AS FbFrghtAmtUSD,&#xA;&#x9;&#x9;f.FB_DSCNT_AMT,&#xA;&#x9;&#x9;f.FB_DSCNT_AMT* coalesce(c.tousd, cc.tousd) AS FbDscntAmtUSD,&#xA;&#x9;&#x9;f.FB_ACC_AMT,&#xA;&#x9;&#x9;f.FB_ACC_AMT* coalesce(c.tousd, cc.tousd) AS FbAccAmtUSD,&#xA;&#x9;&#x9;f.FB_Tax_Amt,&#xA;&#x9;&#x9;f.FB_Tax_Amt* coalesce(c.tousd, cc.tousd) AS FbTaxAmtUSD,&#xA;&#x9;&#x9;f.FB_App_Amt,&#xA;&#x9;&#x9;f.FB_App_Amt* coalesce(c.tousd, cc.tousd) AS FbAppAmtUSD,&#xA;&#x9;&#x9;f.FB_App_Frght_Amt,&#xA;&#x9;&#x9;f.FB_App_Frght_Amt* coalesce(c.tousd, cc.tousd) AS FbAppFrghtAmtUSD,&#xA;&#x9;&#x9;f.FB_App_Dscnt_Amt,&#xA;&#x9;&#x9;f.FB_App_Dscnt_Amt* coalesce(c.tousd, cc.tousd) AS FbAppDscntAmtUSD,&#xA;&#x9;&#x9;f.FB_App_Acc_Amt,&#xA;&#x9;&#x9;f.FB_App_Acc_Amt* coalesce(c.tousd, cc.tousd) AS FbAppAccAmtUSD,&#xA;&#x9;&#x9;f.FB_App_Tax_Amt,&#xA;&#x9;&#x9;f.FB_App_Tax_Amt* coalesce(c.tousd, cc.tousd) AS FbAppTaxAmtUSD,&#xA;&#x9;&#x9;f.FB_App_Tax_Pcnt,&#xA;&#x9;&#x9;f.fb_pd_Amt,&#xA;&#x9;&#x9;f.fb_pd_Amt* coalesce(c.tousd, cc.tousd) AS FbPdAmtUSD,&#xA;&#x9;&#x9;f.Price_Lane_Labl,&#xA;&#x9;&#x9;f.LM_Dist,&#xA;&#x9;&#x9;f.LM_Dist_Qual,&#xA;&#x9;&#x9;fbfl.Fb_Paymt_Terms_Code,&#xA;&#x9;&#x9;f.FB_Terms,&#xA;&#x9;&#x9;i.Bat_Stat,&#xA;&#x9;&#x9;f.Rule_Rt_Winner,&#xA;&#x9;&#x9;f.Rule_CA_Winner,&#xA;&#x9;&#x9;f.TX_LM_Dir,&#xA;&#x9;&#x9;f.Interline_Qual,&#xA;&#x9;&#x9;f.Interline_SCAC,&#xA;&#x9;&#x9;f.Vend_FB_Type,&#xA;&#x9;&#x9;fe.Inco_terms,&#xA;&#x9;&#x9;i.bat_type,&#xA;&#x9;&#x9;f.ca_info_1_raw as ref1,&#xA;&#x9;&#x9;f.ca_info_2_raw as ref2,&#xA;&#x9;&#x9;fe.cust_srvc_name,&#xA;&#x9;&#x9;'' as [Wgt Qual Blng Acct Norm Date],&#xA;&#x9;&#x9;f.tx_lm_type&#xA;&#x9;&#x9;,CASE&#xA;&#x9;&#x9;&#x9;WHEN I.BAT_TYPE = 'MANUAL' THEN 'PAPER'&#xA;&#x9;&#x9;&#x9;ELSE 'ELECTRONIC' &#xA;&#x9;&#x9;END AS [BILL TYPE]&#xA;&#x9;&#x9;,CASE                           &#xA;&#x9;&#x9;&#x9;WHEN I.BAT_TYPE = 'MANUAL' THEN I.BAT_TYPE&#xA;&#x9;&#x9;&#x9;WHEN I.BAT_TYPE &lt;&gt; 'EDI' AND LEFT(I.VEND_FEED,3) = 'MLS' THEN LEFT(I.VEND_FEED,3)+' - M#'&#xA;&#x9;&#x9;&#x9;WHEN I.BAT_TYPE &lt;&gt; 'EDI' AND LEFT(I.VEND_FEED,3) IN ('MPE','MMM') THEN LEFT(I.VEND_FEED,3)+' - PROPRIETARY'&#xA;&#x9;&#x9;&#x9;ELSE 'EDI-'+ V.VEND_FEED_DOC_VER &#xA;&#x9;&#x9;END AS [FILE TYPE]&#x9;&#xA;&#x9;&#x9;,I.BAT_CREAT_DTM AS [RECEIVED DATE]&#xA;&#x9;&#x9;,F.BUNDLE_NUM AS [BUNDLE NUMBER]&#xA;&#x9;&#x9;,IV.AL_CNTRY_CODE_BLNG AS [BILL TO COUNTRY CODE]&#xA;&#x9;&#x9;,VR.REMIT_COMMENT&#xA;&#x9;&#x9;,FE.CUST_MODE&#xA;&#x9;&#x9;,F.LM_ATA_DTM AS DELIVERYDATE&#xA;&#x9;&#x9;,p.APP_DTM AS CLOSEDDATE&#x9;&#xA;&#x9;&#x9;,F.FB_ADJM_DESC&#xA;&#x9;&#x9;,F.FB_ADJM_Reason&#xA;&#x9;&#x9;,FE.OM_Area&#xA;&#x9;&#x9;,FE.OM_Org&#xA;&#x9;&#x9;,FE.BM_Sub_Div&#xA;&#x9;&#x9;,FE.BM_Div&#xA;&#x9;&#x9;,FE.Cust_Srvc_Code&#xA;&#x9;&#x9;,F.[T019],&#xA;&#x9;&#x9;ch.creat_dtm&#xA;&#x9;from applestage.dbo.DeleteFbId ab&#xA;&#x9;&#x9;&#x9;inner join dw.frght_bl f with(nolock,forceseek) &#xA;&#x9;&#x9;&#x9;&#x9;on ab.fbid = f.fb_id&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;inner join dw.frght_bl_ext fe with(nolock,forceseek) &#xA;&#x9;&#x9;&#x9;&#x9;on ab.fbid = fe.fb_id&#xA;&#x9;&#x9;&#x9;inner join dw.inv_bat i with(nolock,forceseek) &#xA;&#x9;&#x9;&#x9;&#x9;on f.bat_id = i.bat_id&#xA;&#x9;&#x9;INNER JOIN dw.INVOICE IV with(nolock,forceseek) &#xA;&#x9;&#x9;&#x9;ON F.INV_ID = IV.INV_ID&#xA;&#x9;&#x9;&#x9;left join applestage.dbo.paidinfo p with (nolock)&#xA;&#x9;&#x9;&#x9;&#x9;on f.fb_id = p.fb_id&#xA;&#x9;&#x9;&#x9;LEFT JOIN dw.[CHECKtable] CH WITH (NOLOCK) &#xA;&#x9;&#x9;&#x9;&#x9;ON p.CHK_EFT_ID = CH.CHK_EFT_ID and ch.IsDeleted=0&#xA;&#xA;&#x9;&#x9;LEFT JOIN [DATAVALIDATION].oandacurrconv C &#xA;&#x9;&#x9;&#x9;ON F.FB_CURRENCY_QUAL = c.CURRQUAL&#xA;&#x9;&#x9;&#x9;and CAST(COALESCE(P.[RCRD_CREAT_DTM],CH.CREAT_DTM,p.APP_DTM) as date) = c.ConversionDTM&#xA;&#x9;&#x9;LEFT JOIN currconv CC with(NOLOCK) &#xA;&#x9;&#x9;&#x9;ON F.FB_CURRENCY_QUAL = CC.CURRQUAL&#xA;&#x9;&#x9;INNER JOIN dw.VENDOR V with(NOLOCK,forceseek) &#xA;&#x9;&#x9;&#x9;ON F.OWNER_KEY = V.OWNER_KEY &#xA;&#x9;&#x9;&#x9;&#x9;AND F.VEND_LABL = V.VEND_LABL&#xA;&#x9;&#x9;LEFT JOIN dw.VENDOR_REMIT VR with(NOLOCK,forceseek) &#xA;&#x9;&#x9;&#x9;ON F.OWNER_KEY = VR.OWNER_KEY&#xA;&#x9;&#x9;&#x9;AND F.VEND_LABL = VR.VEND_LABL&#xA;&#x9;&#x9;&#x9;AND F.FB_CURRENCY_QUAL = VR.CURRENCY_QUAL&#xA;left join dbo.FBNORMFACTLAYER fbfl with (nolock) on fbfl.Fb_id = fe.Fb_Id) a" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Clear Staging"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{FFE17F44-8D42-47C3-83FD-FABC0D8C8730}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Clear Staging"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{378EA0E1-2B7F-4E63-869A-92D60F93ED9A}"
+          SQLTask:SqlStatementSource="truncate table applestage.dbo.paidinfo;&#xA;truncate table applestage.stg.tb_DW_Cost_Allocation&#xA;truncate table applestage.stg.tb_DW_Freight_Bill&#xA;truncate table applestage.stg.tb_DW_Freight_Bill_Lines&#xA;truncate table applestage.dbo.all_fbs_pd;&#xA;truncate table applestage.dbo.TEMP_ModesBase1;&#xA;truncate table applestage.dbo.TEMP_ModesBase2;&#xA;truncate table applestage.dbo.TEMP_ModesBase;&#xA;truncate table applestage.dbo.TEMP_wtqualbase;&#xA;truncate table applestage.dbo.wtqualbase;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Cost Allocation"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{56FE7FC1-07A6-45F1-856D-4EE4CA0748A9}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Cost Allocation"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{88FD9220-7C37-44B2-987A-D7421673D119}"
+          SQLTask:SqlStatementSource="insert into applestage.stg.tb_DW_Cost_Allocation&#xA;SELECT&#xA;&#x9;&#x9;&#x9;  P.fbid&#xA;&#x9;&#x9;&#x9;, l.[CA_LINE_NUM]&#xA;&#x9;&#x9;&#x9;,L.[CA_PCNT] AS [CA PERCENT]&#xA;&#x9;&#x9;&#x9;,L.[CA_AMT] AS  [CA AMOUNT]&#xA;&#x9;&#x9;&#x9;,L.[CA_AMT] * coalesce(c.tousd, cc.tousd) AS [CA AMOUNT USD]&#xA;&#x9;&#x9;&#x9;,L.[CA_ELEM_1] AS  [CA ELEM 1]&#xA;&#x9;&#x9;&#x9;,L.[CA_ELEM_2] AS  [CA ELEM 2]&#xA;&#x9;&#x9;&#x9;,L.[CA_ELEM_3] AS   [CA ELEM 3]&#xA;&#x9;&#x9;&#x9;,L.[CA_ELEM_4] AS  [CA ELEM 4]&#xA;&#x9;&#x9;&#x9;,L.[CA_ELEM_5] AS   [CA ELEM 5]&#xA;&#x9;&#x9;&#x9;,L.[CA_ELEM_6] AS   [CA ELEM 6]&#xA;&#x9;&#x9;&#x9;,L.[CA_ELEM_7]  AS  [CA ELEM 7]&#xA;&#x9;&#x9;&#x9;,L.[CA_ELEM_8] AS   [CA ELEM 8]&#xA;&#x9;&#x9;&#x9;,L.[CA_ELEM_9] AS   [CA ELEM 9]&#xA;&#x9;&#x9;&#x9;,L.[CA_ELEM_10] AS  [CA ELEM 10]&#xA;&#x9;&#x9;&#x9;,L.[CA_ELEM_11] AS   [CA ELEM 11]&#xA;&#x9;&#x9;&#x9;,L.[CA_ELEM_12]  AS  [CA ELEM 12]&#xA;&#x9;&#x9;&#x9;,getdate() createdate&#xA;&#x9;&#x9;&#x9;,getdate() updatedate&#xA;&#x9;&#x9;FROM applestage.dbo.Deletefbid P&#xA;&#x9;&#x9;JOIN dw.[CA_ELEM] L WITH (NOLOCK)&#xA;&#x9;&#x9;&#x9;ON P.fbid = L.UNT_ID AND l.isdeleted=0&#xA;&#x9;&#x9;JOIN dw.FRGHT_BL F WITH (NOLOCK) &#xA;&#x9;&#x9;&#x9;ON L.UNT_ID = F.FB_ID&#xA;&#x9;&#x9;&#x9;left join dw.remitdtl r with (nolock)&#xA;&#x9;&#x9;&#x9;&#x9;on f.fb_id = r.fb_id  AND r.isdeleted=0&#xA;&#x9;&#x9;&#x9;LEFT JOIN dw.[CHECKtable] CH WITH (NOLOCK) &#xA;&#x9;&#x9;&#x9;&#x9;ON R.CHK_EFT_ID = CH.CHK_EFT_ID&#xA;&#x9;&#x9;&#x9;LEFT JOIN dw.PAYR_DTL PP WITH (NOLOCK) &#xA;&#x9;&#x9;&#x9;&#x9;ON R.FB_ID = PP.FB_ID  AND pp.isdeleted=0&#xA;&#x9;&#x9;LEFT JOIN traxdw.[DATAVALIDATION].oandacurrconv C &#xA;&#x9;&#x9;&#x9;ON F.FB_CURRENCY_QUAL = c.CURRQUAL&#xA;&#x9;&#x9;&#x9;and CAST(COALESCE(PP.[RCRD_CREAT_DTM],CH.CREAT_DTM,R.APP_DTM)  as date) = c.ConversionDTM&#xA;&#x9;&#x9;LEFT JOIN currconv CC&#xA;&#x9;&#x9;&#x9;ON F.FB_CURRENCY_QUAL = CC.CURRQUAL" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\freight_bill"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{0BC1355F-F2DA-48DD-A233-D89C515518D5}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="freight_bill"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{88FD9220-7C37-44B2-987A-D7421673D119}"
+          SQLTask:SqlStatementSource="insert into applestage.stg.tb_DW_Freight_Bill([Client]&#xA;,[Region]&#xA;,[Owner Key]&#xA;,[Business Unit]&#xA;,[Start Date]&#xA;,[Master Fb Id]&#xA;,[Master FB ID Number]&#xA;,[Freight Bill Number]&#xA;,[Status]&#xA;,[Current Environment]&#xA;,[SCAC]&#xA;,[Carrier Name]&#xA;,[Mode]&#xA;,[Mode Type]&#xA;,[Service Level]&#xA;,[Lane by City]&#xA;,[Lane by State]&#xA;,[Lane by Country]&#xA;,[Orig Loc Key]&#xA;,[Orig_City5_Name4_Str3]&#xA;,[Orig Addr 1]&#xA;,[Orig Addr 2]&#xA;,[Orig Addr 3]&#xA;,[Orig Addr 4]&#xA;,[Orig City]&#xA;,[Orig State Prov]&#xA;,[Orig Post Code]&#xA;,[Orig Cntry]&#xA;,[Dest Loc Key]&#xA;,[Dest_City5_Name4_Str3]&#xA;,[Dest Addr 1]&#xA;,[Dest Addr 2]&#xA;,[Dest Addr 3]&#xA;,[Dest Addr 4]&#xA;,[Dest City]&#xA;,[Dest State Prov]&#xA;,[Dest Post Code]&#xA;,[Dest Cntry]&#xA;,[Tariff]&#xA;,[Currency Code]&#xA;,[Valid Weight]&#xA;,[Weight Actual]&#xA;,[Weight Actual Kg]&#xA;,[Weight Actual Lb]&#xA;,[Weight Qualifier]&#xA;,[Weight Financial]&#xA;,[Weight Dimensional]&#xA;,[Weight Fncl Kg]&#xA;,[Weight Fncl Lb]&#xA;,[Invoice_ID]&#xA;,[BOL Number]&#xA;,[Ship Date]&#xA;,[Due Date]&#xA;,[Invoice Number]&#xA;,[Invoice Date]&#xA;,[Paid Date]&#xA;,[Billed Amount Total]&#xA;,[Billed Amount USD Total]&#xA;,[Billed Amount Freight]&#xA;,[Billed Amount USD Freight]&#xA;,[Billed Amount Discount]&#xA;,[Billed Amount USD Discount]&#xA;,[Billed Amount Accessorial]&#xA;,[Billed Amount USD Accessorial]&#xA;,[Billed Amount Tax]&#xA;,[Billed Amount USD Tax]&#xA;,[Approved Amount Total]&#xA;,[Approved Amount USD Total]&#xA;,[Approved Amount Freight]&#xA;,[Approved Amount USD Freight]&#xA;,[Approved Amount Discount]&#xA;,[Approved Amount USD Discount]&#xA;,[Approved Amount Accessorial]&#xA;,[Approved Amount USD Accessorial]&#xA;,[Approved Amount Tax]&#xA;,[Approved Amount USD Tax]&#xA;,[Approved Tax Percent]&#xA;,[Paid Amount]&#xA;,[Paid Amount USD]&#xA;,[Price Lane Label]&#xA;,[Shipment Distance]&#xA;,[Shipment Distance Qualifier]&#xA;,[Service]&#xA;,[Rate Scale]&#xA;,[Payment Terms Code]&#xA;,[Payment Terms]&#xA;,[Rule Rate Winner]&#xA;,[Rule CA Winner]&#xA;,[Shipment Direction]&#xA;,[Interline Shipment]&#xA;,[Interline SCAC]&#xA;,[Submission Type]&#xA;,[Account Number Billing]&#xA;,[Account Number Origin]&#xA;,[Account Number Destination]&#xA;,[Customer Reference 1]&#xA;,[Customer Reference 2]&#xA;,[Port of Origin]&#xA;,[Port of Destination]&#xA;,[Lane by Port]&#xA;,[INCO Terms]&#xA;,[Source Feed]&#xA;,[As Of Date]&#xA;,[Address Place Norm Date]&#xA;,[Mode Norm Date]&#xA;,[Service Name Custom]&#xA;,[Wgt Qual Blng Acct Norm Date]&#xA;,[GEO Norm Manual Date]&#xA;,[Division]&#xA;,[Shipment Type]&#xA;,[Business Segment]&#xA;,[Payment Status]&#xA;,[Forward Key]&#xA;,[Booked Date]&#xA;,[Check Type]&#xA;,[Check Date]&#xA;,[Check Amount]&#xA;,[Check Currency]&#xA;,[Bill Type]&#xA;,[File Type]&#xA;,[Received Date]&#xA;,[Bundle Number]&#xA;,[Bill To Country Code]&#xA;,[Orig Zone]&#xA;,[Dest Zone]&#xA;,[Lane by Zone]&#xA;,[Equipment Type]&#xA;,[Master Batch Id]&#xA;,[Remit to Address]&#xA;,[Cust Mode]&#xA;,[Delivery Date]&#xA;,[Closed Date]&#xA;,[Moved to Payment]&#xA;,[ExceptionFlag]&#xA;,[CreateDate]&#xA;,[UpdateDate]&#xA;,[Adjustment Description]&#xA;,[Adjustment Reason]&#xA;,[FPY]&#xA;,[InvoiceHold]&#xA;,[OM_Area]&#xA;,[OM_Org]&#xA;,[BM_Sub_Div]&#xA;,[BM_Div]&#xA;,[Cust_Srvc_Code]&#xA;,[%T019]&#xA;)&#xA;select&#xA;&#x9;  ISNULL(CFG.CLIENTNAME, 'NONE')&#x9;&#x9;&#x9;&#x9;AS [CLIENT]&#xA;&#x9;, coalesce(cv.region,CFG.REGION, 'NONE')&#x9;&#x9;&#x9;&#x9;&#x9;AS [REGION]&#xA;&#x9;, A.OWNER_KEY&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [OWNER KEY]&#xA;&#x9;, coalesce(cv.[business unit],A.BUSINESS_UNIT, 'NONE')&#x9;&#x9;&#x9;&#x9;AS [BUSINESS UNIT]&#xA;&#x9;, CAST(DATEADD(DAY,(DATEPART(DAY,A.[PAID DTM])-1)*(-1),A.[PAID DTM]) AS DATE) AS [START DATE]&#xA;&#x9;, A.FB_ID&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [MASTER FB ID]&#xA;&#x9;, A.FBNID&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [MASTER FB ID NUMBER]&#xA;&#x9;, A.FB_KEY&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [FREIGHT BILL NUMBER]&#xA;&#x9;,  ISNULL(A.[STATUS], 'NONE')&#x9;&#x9;&#x9;&#x9;&#x9;AS [STATUS]&#xA;&#x9;, A.CURR_ENV&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [CURRENT ENVIRONMENT]&#xA;&#x9;,  ISNULL(A.VEND_LABL, 'NONE')&#x9;&#x9;&#x9;&#x9;AS [SCAC]&#xA;&#x9;, A.VEND_NAME&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [CARRIER NAME]&#xA;&#x9;, coalesce(mb.Mode_Norm,ISNULL(A.MODE, 'NONE'))&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [MODE]&#xA;&#x9;, coalesce(mb.ModeType_Norm,ISNULL(A.MODE_TYPE, 'NONE'))&#x9;&#x9;&#x9;&#x9;&#x9;AS [MODE TYPE]&#xA;&#x9;, A.VEND_SRVC_NAME&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [SERVICE LEVEL]&#xA;&#x9;, ISNULL(A.AL_CITY_ORIG,' ') + ', ' + ISNULL(A.AL_STATE_PROV_ORIG,' ') +', ' + coalesce(VNORM.AL_CNTRY_CODE_orig ,a.AL_CNTRY_CODE_orig,' ')&#xA;&#x9;&#x9;&#x9;+' TO '+ ISNULL(A.AL_CITY_DEST,' ') + ', ' + ISNULL(A.AL_STATE_PROV_DEST,' ') +', ' + coalesce(VNORM.AL_CNTRY_CODE_DEST ,a.AL_CNTRY_CODE_DEST,' ')&#x9;AS [LANE BY CITY]&#xA;&#x9;, ISNULL(A.AL_STATE_PROV_ORIG,' ') +', ' + coalesce(VNORM.AL_CNTRY_CODE_orig ,a.AL_CNTRY_CODE_orig,' ')&#xA;&#x9;&#x9;&#x9;+' TO '+ ISNULL(A.AL_STATE_PROV_DEST,' ') +', ' + coalesce(VNORM.AL_CNTRY_CODE_DEST ,a.AL_CNTRY_CODE_DEST,' ')&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [LANE BY STATE]&#xA;&#x9;, coalesce(VNORM.AL_CNTRY_CODE_orig ,a.AL_CNTRY_CODE_orig,' ') + ' TO ' + coalesce(VNORM.AL_CNTRY_CODE_dest ,a.AL_CNTRY_CODE_dest,' ')&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [LANE BY COUNTRY]&#xA;&#x9;, A.LOC_KEY_ORIG&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [ORIG LOC KEY]&#xA;&#x9;, A.ORIG_CITY5_NAME4_STR3&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [ORIG_CITY5_NAME4_STR3]&#xA;&#x9;, A.AL_ORIG_1&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [ORIG ADDR 1]&#xA;&#x9;, A.AL_ORIG_2&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [ORIG ADDR 2]&#xA;&#x9;, A.AL_ORIG_3&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [ORIG ADDR 3]&#xA;&#x9;, A.AL_ORIG_4&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [ORIG ADDR 4]&#xA;&#x9;, A.AL_CITY_ORIG&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [ORIG CITY]&#xA;&#x9;, A.AL_STATE_PROV_ORIG&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [ORIG STATE PROV]&#xA;&#x9;, A.AL_POST_CODE_ORIG&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [ORIG POST CODE]&#xA;&#x9;, A.AL_CNTRY_CODE_ORIG&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [ORIG CNTRY]&#xA;&#x9;, A.LOC_KEY_DEST&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [DEST LOC KEY]&#xA;&#x9;, A.DEST_CITY5_NAME4_STR3&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [DEST_CITY5_NAME4_STR3]&#xA;&#x9;, A.AL_DEST_1&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [DEST ADDR 1]&#xA;&#x9;, A.AL_DEST_2&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [DEST ADDR 2]&#xA;&#x9;, A.AL_DEST_3&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [DEST ADDR 3]&#xA;&#x9;, A.AL_DEST_4&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [DEST ADDR 4]&#xA;&#x9;, A.AL_CITY_DEST&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [DEST CITY]&#xA;&#x9;, A.AL_STATE_PROV_DEST&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [DEST STATE PROV]&#xA;&#x9;, A.AL_POST_CODE_DEST&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [DEST POST CODE]&#xA;&#x9;, A.AL_CNTRY_CODE_DEST&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [DEST CNTRY]&#xA;&#x9;, A.VEND_TARIFF&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [TARIFF]&#xA;&#x9;, A.FB_CURRENCY_QUAL&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [CURRENCY CODE]&#xA;&#x9;, CASE&#xA;&#x9;&#x9;WHEN coalesce(vnorm.fb_Wt_Qual, a.FB_WT_QUAL) IN ('L','LB','LBS','LBS.','K','KG','KGS','KGS.')&#xA;&#x9;&#x9;&#x9;&#x9; AND ISNULL(A.FB_ACTUAL_WT,0) &gt; 0&#xA;&#x9;&#x9;&#x9;&#x9;THEN 'YES'&#xA;&#x9;&#x9;&#x9;ELSE 'NO'&#xA;&#x9;&#x9;END&#x9;AS [VALID WEIGHT]&#xA;&#x9;, A.FB_ACTUAL_WT&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [WEIGHT ACTUAL]&#xA;&#x9;, CASE&#xA;&#x9;&#x9;WHEN coalesce(vnorm.fb_Wt_Qual, a.FB_WT_QUAL) IN ('L','LB','LBS','LBS.')&#xA;&#x9;&#x9;&#x9;THEN A.FB_ACTUAL_WT/2.20462&#xA;&#x9;&#x9;WHEN coalesce(vnorm.fb_Wt_Qual, a.FB_WT_QUAL) IN ('K','KG','KGS','KGS.')&#xA;&#x9;&#x9;&#x9;THEN A.FB_ACTUAL_WT&#xA;&#x9;&#x9;ELSE 0&#xA;&#x9;&#x9;END&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [WEIGHT ACTUAL KG]&#xA;&#x9;, CASE&#xA;&#x9;&#x9;WHEN coalesce(vnorm.fb_Wt_Qual, a.FB_WT_QUAL) IN ('L','LB','LBS','LBS.')&#xA;&#x9;&#x9;&#x9;THEN A.FB_ACTUAL_WT&#xA;&#x9;&#x9;WHEN coalesce(vnorm.fb_Wt_Qual, a.FB_WT_QUAL) IN ('K','KG','KGS','KGS.')&#xA;&#x9;&#x9;&#x9;THEN A.FB_ACTUAL_WT*2.20462&#xA;&#x9;&#x9;ELSE 0&#xA;&#x9;&#x9;END&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [WEIGHT ACTUAL LB]&#xA;&#x9;, vnorm.fb_Wt_Qual&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [WEIGHT QUALIFIER]&#xA;&#x9;, A.FB_FNCL_WT&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [WEIGHT FINANCIAL]&#xA;&#x9;, A.FB_DIM_WT&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [WEIGHT DIMENSIONAL]&#xA;&#x9;, CASE&#xA;&#x9;&#x9;WHEN coalesce(vnorm.fb_Wt_Qual, a.FB_WT_QUAL) IN ('L','LB','LBS','LBS.')&#xA;&#x9;&#x9;&#x9;THEN A.FB_FNCL_WT/2.20462&#xA;&#x9;&#x9;WHEN coalesce(vnorm.fb_Wt_Qual, a.FB_WT_QUAL) IN ('K','KG','KGS','KGS.')&#xA;&#x9;&#x9;&#x9;THEN A.FB_FNCL_WT&#xA;&#x9;&#x9;ELSE 0&#xA;&#x9;&#x9;END&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [WEIGHT FNCL KG]&#xA;&#x9;, CASE&#xA;&#x9;&#x9;WHEN coalesce(vnorm.fb_Wt_Qual, a.FB_WT_QUAL) IN ('L','LB','LBS','LBS.')&#xA;&#x9;&#x9;&#x9;THEN A.FB_FNCL_WT&#xA;&#x9;&#x9;WHEN coalesce(vnorm.fb_Wt_Qual, a.FB_WT_QUAL) IN ('K','KG','KGS','KGS.')&#xA;&#x9;&#x9;&#x9;THEN A.FB_FNCL_WT*2.20462&#xA;&#x9;&#x9;ELSE 0&#xA;&#x9;&#x9;END&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [WEIGHT FNCL LB]&#xA;&#x9;, A.INV_ID&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [INVOICE_ID]&#xA;&#x9;, A.BOL_NUM_KEY&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [BOL NUMBER]&#xA;&#x9;, A.LM_PKUP_ACTUAL_DTM&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [SHIP DATE]&#xA;&#x9;, A.FB_DUE_DTM&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [DUE DATE]&#xA;&#x9;, A.INV_KEY&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [INVOICE NUMBER]&#xA;&#x9;, A.FB_CREAT_DTM&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [INVOICE DATE]&#xA;&#x9;, A.[PAID DTM]&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [PAID DATE]&#xA;&#x9;, A.FB_AMT&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [BILLED AMOUNT TOTAL]&#xA;&#x9;, A.FBAMTUSD&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [BILLED AMOUNT USD TOTAL]&#xA;&#x9;, A.FB_FRGHT_AMT&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [BILLED AMOUNT FREIGHT]&#xA;&#x9;, A.FBFRGHTAMTUSD&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [BILLED AMOUNT USD FREIGHT]&#xA;&#x9;, A.FB_DSCNT_AMT&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [BILLED AMOUNT DISCOUNT]&#xA;&#x9;, A.FBDSCNTAMTUSD&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [BILLED AMOUNT USD DISCOUNT]&#xA;&#x9;, A.FB_ACC_AMT&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [BILLED AMOUNT ACCESSORIAL]&#xA;&#x9;, A.FBACCAMTUSD&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [BILLED AMOUNT USD ACCESSORIAL]&#xA;&#x9;, A.FB_TAX_AMT&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [BILLED AMOUNT TAX]&#xA;&#x9;, A.FBTAXAMTUSD&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [BILLED AMOUNT USD TAX]&#xA;&#x9;, A.FB_APP_AMT&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [APPROVED AMOUNT TOTAL]&#xA;&#x9;, A.FBAPPAMTUSD&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [APPROVED AMOUNT USD TOTAL]&#xA;&#x9;, A.FB_APP_FRGHT_AMT&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [APPROVED AMOUNT FREIGHT]&#xA;&#x9;, A.FBAPPFRGHTAMTUSD&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [APPROVED AMOUNT USD FREIGHT]&#xA;&#x9;, A.FB_APP_DSCNT_AMT&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [APPROVED AMOUNT DISCOUNT]&#xA;&#x9;, A.FBAPPDSCNTAMTUSD&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [APPROVED AMOUNT USD DISCOUNT]&#xA;&#x9;, A.FB_APP_ACC_AMT&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [APPROVED AMOUNT ACCESSORIAL]&#xA;&#x9;, A.FBAPPACCAMTUSD&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [APPROVED AMOUNT USD ACCESSORIAL]&#xA;&#x9;, A.FB_APP_TAX_AMT&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [APPROVED AMOUNT TAX]&#xA;&#x9;, A.FBAPPTAXAMTUSD&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [APPROVED AMOUNT USD TAX]&#xA;&#x9;, A.FB_APP_TAX_PCNT&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [APPROVED TAX PERCENT]&#xA;&#x9;, A.FB_PD_AMT&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [PAID AMOUNT]&#xA;&#x9;, A.FBPDAMTUSD&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [PAID AMOUNT USD]&#xA;&#x9;, A.PRICE_LANE_LABL&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [PRICE LANE LABEL]&#xA;&#x9;, A.LM_DIST&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [SHIPMENT DISTANCE]&#xA;&#x9;, A.LM_DIST_QUAL&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [SHIPMENT DISTANCE QUALIFIER]&#xA;&#x9;, A.VEND_SRVC_NAME&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [SERVICE]&#xA;&#x9;, A.VEND_RATE_SCALE&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [RATE SCALE]&#xA;&#x9;, A.FB_PAYMT_TERMS_CODE&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [PAYMENT TERMS CODE]&#xA;&#x9;, A.FB_TERMS&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [PAYMENT TERMS]&#xA;&#x9;, A.RULE_RT_WINNER&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [RULE RATE WINNER]&#xA;&#x9;, A.RULE_CA_WINNER&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [RULE CA WINNER]&#xA;&#x9;, A.TX_LM_DIR&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [SHIPMENT DIRECTION]&#xA;&#x9;, A.INTERLINE_QUAL&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [INTERLINE SHIPMENT]&#xA;&#x9;, A.INTERLINE_SCAC&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [INTERLINE SCAC]&#xA;&#x9;, A.VEND_FB_TYPE&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [SUBMISSION TYPE]&#xA;&#x9;, A.ACCT_NUM_VEND_BLNG&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [ACCOUNT NUMBER BILLING]&#xA;&#x9;, A.ACCT_NUM_VEND_ORIG&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [ACCOUNT NUMBER ORIGIN]&#xA;&#x9;, A.ACCT_NUM_VEND_DEST&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [ACCOUNT NUMBER DESTINATION]&#xA;&#x9;, A.REF1&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [CUSTOMER REFERENCE 1]&#xA;&#x9;, A.REF2&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [CUSTOMER REFERENCE 2]&#xA;&#x9;, A.PORT_ORIG&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [PORT OF ORIGIN]&#xA;&#x9;, A.PORT_DEST&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [PORT OF DESTINATION]&#xA;&#x9;, A.PORT_ORIG + ' TO ' + A.PORT_DEST&#x9;&#x9;&#x9;AS [LANE BY PORT]&#xA;&#x9;, A.INCO_TERMS&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [INCO TERMS]&#xA;&#x9;, A.FBTYPE&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [SOURCE FEED]&#xA;&#x9;, GETDATE()&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [AS OF DATE]&#xA;&#x9;, NULL&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [ADDRESS PLACE NORM DATE]&#xA;&#x9;, NULL&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [MODE NORM DATE]&#xA;&#x9;,ISNULL( A.CUST_SRVC_NAME,'NONE')&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [SERVICE NAME CUSTOM]&#xA;&#x9;, NULL&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [WGT QUAL BLNG ACCT NORM DATE]&#xA;&#x9;, NULL&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [GEO NORM MANUAL DATE]&#xA;&#x9;, coalesce(cv.division,CFG.DIVISION, 'NONE')/*ISNULL(CFG.DIVISION, 'NONE'))*/&#x9;&#x9;&#x9;&#x9;AS [DIVISION]&#xA;&#x9;, A.TX_LM_TYPE&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [SHIPMENT TYPE]&#xA;&#x9;,ISNULL(cv.[business segment],'NONE')&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [BUSINESS SEGMENT]&#xA;&#x9;,NULL&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [PAYMENT STATUS]&#xA;&#x9;,NULL&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [FORWARD KEY]&#xA;&#x9;,a.[BOOKED DATE]&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [BOOKED DATE]&#xA;&#x9;,NULL&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [CHECK TYPE]&#xA;&#x9;,a.checkdate&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [CHECK DATE]&#xA;&#x9;,NULL&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [CHECK AMOUNT]&#xA;&#x9;,NULL&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [CHECK CURRENCY]&#xA;&#x9;,A.[BILL TYPE]&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [BILL TYPE]&#xA;&#x9;,A.[FILE TYPE]&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [FILE TYPE]&#xA;&#x9;,A.[RECEIVED DATE]&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [RECEIVED DATE]&#xA;&#x9;,A.[BUNDLE NUMBER]&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [BUNDLE NUMBER]&#xA;&#x9;,A.[BILL TO COUNTRY CODE]&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [BILL TO COUNTRY CODE]&#xA;&#x9;,NULL&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [ORIG ZONE]&#xA;&#x9;,NULL&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [DEST ZONE]&#xA;&#x9;,NULL&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [LANE BY ZONE]&#xA;&#x9;,NULL&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [EQUIPMENT TYPE]&#xA;&#x9;,A.BAT_ID&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [MASTER BATCH ID]&#xA;&#x9;,A.REMIT_COMMENT&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [REMIT TO ADDRESS]&#xA;&#x9;,A.CUST_MODE&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [CUST MODE]&#xA;&#x9;,A.DELIVERYDATE&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [DELIVERY DATE]&#xA;&#x9;,A.CLOSEDDATE&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [CLOSED DATE]&#xA;&#x9;,coalesce(mtp.movedtopayment,case when&#xA;       pd.CreateDate &lt; pd.RCRD_CREAT_DTM then dateadd(minute,-30,pd.CreateDate)&#xA;       else pd.RCRD_CREAT_DTM&#xA;     end) AS [Moved To Payment]&#xA;&#x9;--,coalesce(pd.RCRD_CREAT_DTM,mtp.movedtopayment)&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [Moved To Payment]&#xA;&#x9;,'0'&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [ExceptionFlag]&#xA;&#x9;,getdate() createdate&#xA;&#x9;,getdate() updateddate&#xA;&#x9;,A.FB_ADJM_DESC&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [Adjustment Description]&#xA;&#x9;,A.FB_ADJM_Reason&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [Adjustment Reason]&#xA;&#x9;,'0'&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [FPY]&#xA;&#x9;,'0'&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [InvoiceHold]&#xA;&#x9;,A.OM_Area&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [OM_Area]&#xA;&#x9;,A.OM_Org&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [OM_Org]&#xA;&#x9;,A.BM_Sub_Div&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [BM_Sub_Div]&#xA;&#x9;,A.BM_Div&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [BM_Div]&#xA;&#x9;,A.Cust_Srvc_Code&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [Cust_Srvc_Code]&#xA;&#x9;,A.[T019]&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [%T0019]&#xA;from applestage.dbo.all_fbs_pd a (nolock)&#xA;&#x9;inner join dbo.Client_BU_Region_Grouped cfg&#xA;&#x9;&#x9;on a.owner_key = cfg.ownerkey&#xA;&#x9;&#x9;&#x9;and (a.business_unit = cfg.businessunitreportvalue &#xA;&#x9;&#x9;&#x9;&#x9; or (cfg.businessunitreportvalue is null  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9; and not exists &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;(select 1 &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9; from dbo.Client_BU_Region_Grouped cfg2 &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9; where cfg2.OwnerKey = a.Owner_Key&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and a.business_unit = cfg2.businessunitreportvalue) ))&#xA;left join applestage.dbo.WtQualBase wt on wt.fb_id = a.fb_id&#xA;left join applestage.dbo.TEMP_ModesBase mb on mb.fb_id = a.fb_id&#xA;left join dw.payr_dtl pd on pd.fb_id = a.fb_id&#xA;left join traxdw.dbo.movedtopaymentapple mtp  on mtp.fb_id = a.fb_id&#xA;left join applestage.dbo.STG_CustomValues cv on cv.fb_id = a.fb_id&#xA;LEFT JOIN [DW].[vwFbTraxDwEtl] VNORM ON VNORM.FBID = a.fb_id" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\freight_bill_lines"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{590DEC37-5989-4576-8C87-2FADB2F91FFC}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="freight_bill_lines"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{88FD9220-7C37-44B2-987A-D7421673D119}"
+          SQLTask:SqlStatementSource="insert into applestage.stg.tb_DW_Freight_Bill_Lines&#xA;SELECT &#xA;&#x9;&#x9;&#x9;  P.fbid&#xA;&#x9;&#x9;&#x9;, l.Line_item_num&#xA;&#x9;&#x9;&#x9;,L.[QTY_LABL] AS [QUANTITY LABEL]&#xA;&#x9;&#x9;&#x9;,L.[CHRG_DESC] AS [CHARGE DESCRIPTION]&#xA;&#x9;&#x9;&#x9;,L.[CHRG_AMT] AS [CHARGE AMOUNT]&#xA;&#x9;&#x9;&#x9;,L.[CHRG_AMT]* coalesce(c.tousd, cc.tousd) AS  [CHARGE AMOUNT USD]&#xA;&#x9;&#x9;&#x9;,L.[TX_RATE_AMT] AS [TRAX RATED AMOUNT]&#xA;&#x9;&#x9;&#x9;,L.[TX_RATE_AMT]* coalesce(c.tousd, cc.tousd) AS  [TRAX RATED AMOUNT USD]&#xA;&#x9;&#x9;&#x9;,L.[RATE_TYPE]  AS [RATE TYPE]&#xA;&#x9;&#x9;&#x9;,L.[RATE_PER_UNT_CNT]  AS [RATE PER UNIT COUNT]&#xA;&#x9;&#x9;&#x9;,L.[CAT]  AS [CATEGORY]&#xA;&#x9;&#x9;&#x9;,L.[PKG_TYPE] AS [PACKAGE TYPE]&#xA;&#x9;&#x9;&#x9;,L.[PCS_CNT] AS [PIECES COUNT]&#xA;&#x9;&#x9;&#x9;,NULL  AS  [DIMENSIONAL DATA]&#xA;&#x9;&#x9;&#x9;,L.[LN_CHRG_CODE] AS  [LINE CHARGE CODE]&#xA;&#x9;&#x9;&#x9;,L.[LN_ACTUAL_WT] AS  [LINE ACTUAL WEIGHT]&#xA;&#x9;&#x9;&#x9;,L.[LN_RATE_AS_WT] AS [LINE RATE AS WEIGHT]&#xA;&#x9;&#x9;&#x9;,NULL  AS  [VENDOR DESCRIPTION]&#xA;&#x9;&#x9;&#x9;,L.[CMDTY_CLASS] AS  [COMMODITY CLASS]&#xA;&#x9;&#x9;&#x9;, case&#xA;&#x9;&#x9;&#x9;&#x9;when l.[LN_CHRG_CODE] in ('405','BAF','BSC','BUA','FSC','FSI','FSC','FUR')&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;or (l.[LN_CHRG_CODE] not in ('405','BAF','BSC','BUA','FSC','FSI','FSC','FUR')&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and (L.[CHRG_DESC] like '%Fuel%'&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9; or L.[CHRG_DESC] like '%Bunker%'))&#xA;&#x9;&#x9;&#x9;&#x9;then 'Fuel'&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;when l.[LN_CHRG_CODE] in ('750','GST','HST','QST','TAX','TAY','VAT')&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;or (l.[LN_CHRG_CODE] not in ('750','GST','HST','QST','TAX','TAY','VAT')&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and (L.[CHRG_DESC] like '%Tax%'&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;or L.[CHRG_DESC] like '% VAT %'))&#xA;&#x9;&#x9;&#x9;&#x9;then 'Tax'&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;when l.[LN_CHRG_CODE] in ('145','240','360','365','370','440','555','BAB','BND',&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;   'CFL','CSE','CSF','CTX','CUS','EEX','EIC')&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;or (l.[LN_CHRG_CODE] not in ('145','240','360','365','370','440','555','BAB','BND',&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;'CFL','CSE','CSF','CTX','CUS','EEX','EIC')&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and (L.[CHRG_DESC] like '%Customs%'&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;or L.[CHRG_DESC] like '%Broker%'))&#xA;&#x9;&#x9;&#x9;&#x9;then 'CustBroker'&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;when l.[LN_CHRG_CODE] in ('315','ESD')&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;or (l.[LN_CHRG_CODE] not in ('315','ESD')&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and L.[CHRG_DESC] like '%Duty%')&#xA;&#x9;&#x9;&#x9;&#x9;then 'Duty'&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;when L.[CAT] in ('Freight','Discount')&#xA;&#x9;&#x9;&#x9;&#x9;then 'Freight'&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;when L.[CAT] in ('ADJM')&#xA;&#x9;&#x9;&#x9;&#x9;then 'Adjustment'&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;else 'Other Accessorial'&#xA;&#x9;&#x9;&#x9;end&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;AS [REPORT CATEGORY]&#xA;&#x9;&#x9;&#x9;,getdate() createdate&#xA;&#x9;&#x9;&#x9;,getdate() updatedate&#xA;&#x9;&#x9;FROM [AppleStage].[dbo].DeleteFbid P with(nolock)&#xA;&#x9;&#x9;JOIN dw.[FB_LN] L WITH (NOLOCK)&#xA;&#x9;&#x9;&#x9;ON P.fbid = L.FB_ID and l.isdeleted=0 --AND P.LineNumber = L.Line_item_num&#xA;&#x9;&#x9;JOIN dw.FRGHT_BL F WITH (NOLOCK) &#xA;&#x9;&#x9;&#x9;ON L.FB_ID = F.FB_ID&#xA;&#x9;&#x9;&#x9;left join dw.remitdtl r with (nolock)&#xA;&#x9;&#x9;&#x9;&#x9;on f.fb_id = r.fb_id and r.isdeleted = 0&#xA;&#x9;&#x9;&#x9;LEFT JOIN dw.[CHECKtable] CH WITH (NOLOCK) &#xA;&#x9;&#x9;&#x9;&#x9;ON R.CHK_EFT_ID = CH.CHK_EFT_ID  and r.isdeleted = 0&#xA;&#x9;&#x9;&#x9;LEFT JOIN dw.PAYR_DTL PP WITH (NOLOCK) &#xA;&#x9;&#x9;&#x9;&#x9;ON R.FB_ID = PP.FB_ID  and pp.isdeleted = 0&#xA;&#x9;&#x9;LEFT JOIN traxdw.[DATAVALIDATION].oandacurrconv  C &#xA;&#x9;&#x9;&#x9;ON F.FB_CURRENCY_QUAL = c.CURRQUAL&#xA;&#x9;&#x9;&#x9;and CAST(COALESCE(PP.[RCRD_CREAT_DTM],CH.CREAT_DTM,R.APP_DTM) as date) = c.ConversionDTM&#xA;&#x9;&#x9;LEFT JOIN currconv CC&#xA;&#x9;&#x9;&#x9;ON F.FB_CURRENCY_QUAL = CC.CURRQUAL" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get Custome Values"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{AC53E985-5ECB-4B08-85BE-025A0F724903}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get Custome Values"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{378EA0E1-2B7F-4E63-869A-92D60F93ED9A}"
+          SQLTask:SqlStatementSource="exec usp_EvaluateConceptRules" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get Paid Info"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{089EC6E1-CF46-45D4-A306-B19EBFCAF41C}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get Paid Info"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{88FD9220-7C37-44B2-987A-D7421673D119}"
+          SQLTask:SqlStatementSource="insert into applestage.dbo.paidinfo&#xA;select * from&#xA;(&#xA;Select f.fb_id,case WHEN (isdate(rd.[T003])=1 or rd.[T003] is null)  THEN rd.[T003]&#xA;       --ELSE Cast(Substring(rd.[T003],1,4)+'-'+Substring(rd.[T003],5,2)+'-'+Substring(rd.[T003],7,2) as date) &#xA;&#x9;   END AS [BOOKED DATE] ,rD.pd_amt,Rd.APP_DTM APP_DTM,CHK_EFT_ID,null [RCRD_CREAT_DTM]&#xA;      from applestage.dbo.[DeleteFbId] ab with(nolock)&#xA;&#x9;  INNER JOIN dw.frght_bl f with(nolock,forceseek) ON f.fb_id = ab.fbid&#xA;      join  dw.RemitDtl rd with(nolock,forceseek) ON f.fb_id=rd.fb_id and rd.IsDeleted=0 &#xA;&#xA;    Union All&#xA;&#xA;&#x9;select p.fb_id ,p.[T003] as [Prod Book Date],b.fb_app_amt pd_amt,null APP_DTM, null CHK_EFT_ID, P.[RCRD_CREAT_DTM]&#xA;&#x9;from applestage.dbo.[DeleteFbId] ab with(nolock)&#xA;&#x9;inner join dw.payr_dtl p with(nolock,forceseek) on p.fb_id = ab.fbid and p.IsDeleted=0&#xA;&#x9;inner join dw.FRGHT_BL b with(nolock,index([PK_FRGHT_BL])) on b.fb_id = p.fb_id ) a" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Mode1"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{905ADB92-671E-4BAE-9898-8F9BB5F50747}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Mode1"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{88FD9220-7C37-44B2-987A-D7421673D119}"
+          SQLTask:SqlStatementSource="insert into applestage.dbo.TEMP_MODESBASE1&#xA;SELECT&#x9;F.FB_ID&#xA;&#x9;&#x9;&#x9;&#x9;, V.VEND_NAME&#xA;&#x9;&#x9;&#x9;&#x9;, CASE&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;WHEN F.SRVC_REQ_CODE+F.VEND_SRVC_NAME LIKE '%GROUN%' THEN 'GROUND'&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;ELSE NULL&#xA;&#x9;&#x9;&#x9;&#x9;  END AS 'SERVICEKEYWORD'&#xA;&#x9;&#x9;&#x9;&#x9;, ISNULL(FE.MODE,'UNKNOWN') AS 'MODE'&#xA;&#x9;&#x9;&#x9;&#x9;, ISNULL(FE.MODE_TYPE,'UNKNOWN') AS 'MODETYPE'&#xA;&#x9;&#x9;&#x9;&#x9;, CASE &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;WHEN MMTS.NEWMODE IS NOT NULL THEN MMTS.NEWMODE&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;WHEN MMTG.NEWMODE IS NOT NULL THEN MMTG.NEWMODE&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;ELSE FE.MODE&#xA;&#x9;&#x9;&#x9;&#x9;  END AS 'MODE_NORM'&#xA;&#x9;&#x9;&#x9;&#x9;, CASE &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;WHEN MMTS.NEWMODETYPE IS NOT NULL THEN MMTS.NEWMODETYPE&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;WHEN MMTG.NEWMODETYPE IS NOT NULL THEN MMTG.NEWMODETYPE&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;ELSE FE.MODE_TYPE&#xA;&#x9;&#x9;&#x9;&#x9;  END AS 'MODETYPE_NORM'&#xA;&#x9;&#x9;&#x9;&#x9;, CASE&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;WHEN LSPTS.LSPTYPE IS NOT NULL THEN LSPTS.LSPTYPE&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;ELSE NULL&#xA;&#x9;&#x9;&#x9;&#x9;  END AS 'LSPTYPE_NORM'&#xA;&#x9;&#xA;&#x9;&#x9;FROM applestage.dbo.ALL_FBS_PD T&#xA;&#x9;&#x9;&#x9;INNER JOIN traxdw.[dw].FRGHT_BL F (NOLOCK) &#xA;&#x9;&#x9;&#x9;&#x9;ON T.FB_ID = F.FB_ID&#xA;&#x9;&#x9;&#x9;INNER JOIN traxdw.[dw].FRGHT_BL_EXT FE (NOLOCK) &#xA;&#x9;&#x9;&#x9;&#x9;ON F.FB_ID = FE.FB_ID &#xA;&#x9;&#x9;&#x9;INNER JOIN traxdw.[dw].VENDOR V (NOLOCK) &#xA;&#x9;&#x9;&#x9;ON F.OWNER_KEY = V.OWNER_KEY  AND v.isdeleted=0&#xA;&#x9;&#x9;&#x9;&#x9;AND F.VEND_LABL = V.VEND_LABL&#xA;&#x9;&#x9;&#x9;LEFT JOIN traxdw.[DATAVALIDATION].MMT_SPECIFIC MMTS (NOLOCK) &#xA;&#x9;&#x9;&#x9;&#x9;ON ISNULL(FE.MODE,'UNKNOWN') = MMTS.MODE_NORM &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;AND ISNULL(FE.MODE_TYPE,'UNKNOWN') = MMTS.MODETYPE_NORM&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;AND F.VEND_LABL = MMTS.VEND_LABL &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;AND F.OWNER_KEY = MMTS.OWNERKEY&#xA;&#x9;&#x9;&#x9;LEFT JOIN traxdw.[DATAVALIDATION].MMT_GENERAL MMTG (NOLOCK) &#xA;&#x9;&#x9;&#x9;&#x9;ON FE.MODE = MMTG.MODE_NORM &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;AND FE.MODE_TYPE = MMTG.MODETYPE_NORM&#xA;&#x9;&#x9;&#x9;LEFT JOIN traxdw.[DATAVALIDATION].LSPTYPE_SPECIFIC LSPTS (NOLOCK)&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;ON F.VEND_LABL = LSPTS.VEND_LABL &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;AND F.OWNER_KEY = LSPTS.OWNERKEY" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ModeBase"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{7CAA76DC-0F58-4BD7-9DF4-1115AD8D9749}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ModeBase"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{88FD9220-7C37-44B2-987A-D7421673D119}"
+          SQLTask:SqlStatementSource="insert into applestage.dbo.TEMP_MODESBASE&#xA;select&#x9;mb2.FB_ID&#xA;&#x9;&#x9;&#x9;, MB2.Mode&#xA;&#x9;&#x9;&#x9;, MB2.ModeType&#xA;&#x9;&#x9;&#x9;, MMT.Mode as 'Mode_Canon'&#xA;&#x9;&#x9;&#x9;, MMT2.ModeType as 'ModeType_Canon'&#xA;&#x9;&#x9;&#x9;, mb2.Mode_Final as 'Mode_Norm'&#xA;&#x9;&#x9;&#x9;, case &#xA;&#x9;&#x9;&#x9;&#x9;when isnull(mb2.Mode_Final,'Unknown') = 'Unknown' then 'Mode-Missing'&#xA;&#x9;&#x9;&#x9;&#x9;when mb2.Mode_Final is not null and MMT.Mode is null then 'Mode-Invalid'&#xA;&#x9;&#x9;&#x9;&#x9;when mb2.Mode_Final is not null and MMT.Mode is not null then 'Mode-Valid'&#xA;&#x9;&#x9;&#x9;&#x9;else null&#xA;&#x9;&#x9;&#x9;  end as 'Mode_Method'&#xA;&#x9;&#x9;&#x9;, mb2.ModeType_Final as 'ModeType_Norm'&#xA;&#x9;&#x9;&#x9;, case &#xA;&#x9;&#x9;&#x9;&#x9;when isnull(mb2.ModeType_Final,'Unknown') = 'Unknown' then 'ModeType-Missing'&#xA;&#x9;&#x9;&#x9;&#x9;when mb2.ModeType_Final is not null and MMT2.ModeType is null then 'ModeType-Invalid'&#xA;&#x9;&#x9;&#x9;&#x9;when mb2.ModeType_Final is not null and MMT2.ModeType is not null then 'ModeType-Valid'&#xA;&#x9;&#x9;&#x9;&#x9;else null&#xA;&#x9;&#x9;&#x9;  end as 'ModeType_Method'&#xA;&#x9;&#x9;&#x9;, mb2.LSPType_Final as 'LSPType_Norm'&#xA;&#x9;&#x9;&#x9;, case &#xA;&#x9;&#x9;&#x9;&#x9;when mb2.LSPType_Final is null then 'ModeType-Missing'&#xA;&#x9;&#x9;&#x9;&#x9;else 'ModeType-Derived'&#xA;&#x9;&#x9;&#x9;  end as 'LSPType_Method'&#xA;&#x9;&#x9;FROM applestage.dbo.TEMP_MODESBASE2 MB2 (NOLOCK)&#xA;&#x9;&#x9;&#x9;LEFT JOIN traxdw.[DATAVALIDATION].MODES MMT (NOLOCK) &#xA;&#x9;&#x9;&#x9;&#x9;ON MB2.MODE_FINAL = MMT.MODE&#xA;&#x9;&#x9;&#x9;LEFT JOIN traxdw.[DATAVALIDATION].MODETYPES MMT2 (NOLOCK) &#xA;&#x9;&#x9;&#x9;&#x9;ON MB2.MODETYPE_FINAL = MMT2.MODETYPE" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ModeBase2"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{38B021AD-503C-4386-BDFC-B8E183C5BA80}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ModeBase2"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{88FD9220-7C37-44B2-987A-D7421673D119}"
+          SQLTask:SqlStatementSource="insert into applestage.dbo.TEMP_MODESBASE2&#xA;select&#x9;FB_ID,&#xA;&#x9;&#x9;&#x9;ServiceKeyword,&#xA;&#x9;&#x9;&#x9;Mode,&#xA;&#x9;&#x9;&#x9;ModeType,&#xA;&#x9;&#x9;&#x9;case&#xA;&#x9;&#x9;&#x9;&#x9;when (Mode_Norm = 'Parcel' or ModeType_Norm = 'Parcel') and ServiceKeyword = 'Ground' then 'Surface'&#xA;&#x9;&#x9;&#x9;&#x9;when (Mode_Norm = 'Parcel' or ModeType_Norm = 'Parcel') then 'Air'&#xA;&#x9;&#x9;&#x9;&#x9;else Mode_Norm&#xA;&#x9;&#x9;&#x9;end as 'Mode_Final',&#xA;&#x9;&#x9;&#x9;case&#xA;&#x9;&#x9;&#x9;&#x9;when (Mode_Norm = 'Parcel' or ModeType_Norm = 'Parcel') and ServiceKeyword = 'Ground' then 'Parcel'&#xA;&#x9;&#x9;&#x9;&#x9;when (Mode_Norm = 'Parcel' or ModeType_Norm = 'Parcel') then 'Parcel'&#xA;&#x9;&#x9;&#x9;&#x9;else ModeType_Norm&#xA;&#x9;&#x9;&#x9;end as 'ModeType_Final',&#xA;&#x9;&#x9;&#x9;case&#xA;&#x9;&#x9;&#x9;&#x9;when LSPType_Norm is not null then LSPType_Norm&#xA;&#x9;&#x9;&#x9;&#x9;when (VEND_NAME like '%UPS%' or VEND_NAME like '%Fede%' or VEND_NAME like '%DHL%') then 'Integrator'&#xA;&#x9;&#x9;&#x9;&#x9;when (VEND_NAME like '%Ceva%' or VEND_NAME like '%Expeditor%' or VEND_NAME like '%Schenker%' or VEND_NAME like '%Kintetsu%'&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  or VEND_NAME like '%Panalpina%' or VEND_NAME like '%Kuehne%' or VEND_NAME like '%Nippon%' or VEND_NAME like '%Forward%') then 'Forwarder'&#xA;&#x9;&#x9;&#x9;&#x9;when VEND_NAME like '%Courier%' then 'Courier'&#xA;&#x9;&#x9;&#x9;&#x9;else 'Direct'&#xA;&#x9;&#x9;&#x9;end as 'LSPType_Final'&#xA;&#x9;from&#x9;applestage.dbo.TEMP_ModesBase1" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Temp_wtqualbase"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{61DC3F09-1003-49C6-B030-A6CC45D05C61}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Temp_wtqualbase"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{88FD9220-7C37-44B2-987A-D7421673D119}"
+          SQLTask:SqlStatementSource="insert into applestage.dbo.TEMP_WtQualBase&#xA;select f.FB_ID&#xA;&#x9;&#x9;, f.FB_WT_QUAL&#xA;&#x9;&#x9;, WQSD.Wt_Qual_Norm as 'WtQual_SCAC_Default' &#xA;&#x9;&#x9;, WQOD.Wt_Qual_Norm as 'WtQual_Owner_Default'&#xA;&#x9;&#x9;, case &#xA;&#x9;&#x9;&#x9;&#x9;when Left(IsNull(f.FB_WT_QUAL,''),1)= 'L' then 'LB'&#xA;&#x9;&#x9;&#x9;&#x9;when Left(IsNull(f.FB_WT_QUAL,''),1)= 'K' then 'KG'&#xA;&#x9;&#x9;&#x9;&#x9;when Left(IsNull(f.FB_WT_QUAL,''),1)= 'T' then 'TN'&#xA;&#x9;&#x9;&#x9;&#x9;when (IsNull(f.FB_WT_QUAL,'') like '%LB%' &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;or IsNull(f.FB_WT_QUAL,'') like '%POUND%' &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;or IsNull(f.FB_WT_QUAL,'') like '%#%')&#xA;&#x9;&#x9;&#x9;&#x9;&#x9; then 'LB'&#xA;&#x9;&#x9;&#x9;&#x9;when (IsNull(f.FB_WT_QUAL,'') like '%KG%' &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;or IsNull(f.FB_WT_QUAL,'') like '%KILO%') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9; then 'KG'&#xA;&#x9;&#x9;&#x9;&#x9;when Left(IsNull(WQSD.Wt_Qual_Norm,''),1) = 'L' then 'LB'&#xA;&#x9;&#x9;&#x9;&#x9;when Left(IsNull(WQSD.Wt_Qual_Norm,''),1) = 'K' then 'KG'&#xA;&#x9;&#x9;&#x9;&#x9;when (isnull(f.AL_CNTRY_CODE_ORIG,'') in ('US','USA','CA','CANADA','UNITED STATES') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;or isnull(f.AL_CNTRY_CODE_DEST,'') in ('US','USA','CA','CANADA','UNITED STATES')) &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  and isnull(i.AL_CNTRY_CODE_BLNG,'') in ('US','USA','CA','CANADA','UNITED STATES') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  and i.AL_CNTRY_CODE_BLNG is not null &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  then 'LB'&#xA;&#x9;&#x9;&#x9;&#x9;when (isnull(f.AL_CNTRY_CODE_ORIG,'') in ('US','USA','CA','CANADA','UNITED STATES') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;or isnull(f.AL_CNTRY_CODE_DEST,'') in ('US','USA','CA','CANADA','UNITED STATES')) &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  and isnull(i.AL_CNTRY_CODE_BLNG,'') not in ('US','USA','CA','CANADA','UNITED STATES') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  and i.AL_CNTRY_CODE_BLNG is not null &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  then 'KG'&#xA;&#x9;&#x9;&#x9;&#x9;when (isnull(f.AL_CNTRY_CODE_ORIG,'') in ('US','USA','CA','CANADA','UNITED STATES') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;or isnull(f.AL_CNTRY_CODE_DEST,'') in ('US','USA','CA','CANADA','UNITED STATES')) &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  and isnull(WQOD.Wt_Qual_Norm,'') = 'L' &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  then 'LB'&#xA;&#x9;&#x9;&#x9;&#x9;when (isnull(f.AL_CNTRY_CODE_ORIG,'') in ('US','USA','CA','CANADA','UNITED STATES') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;or isnull(f.AL_CNTRY_CODE_DEST,'') in ('US','USA','CA','CANADA','UNITED STATES')) &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  and isnull(WQOD.Wt_Qual_Norm,'') = 'K' &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  then 'KG'&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;when (isnull(f.AL_CNTRY_CODE_ORIG,'') not in ('US','USA','CA','CANADA','UNITED STATES') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  and isnull(f.AL_CNTRY_CODE_DEST,'') not in ('US','USA','CA','CANADA','UNITED STATES')) &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  and f.AL_CNTRY_CODE_ORIG is not null &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  and f.AL_CNTRY_CODE_DEST is not null then 'KG'&#xA;&#x9;&#x9;&#x9;&#x9;when Left(IsNull(WQOD.Wt_Qual_Norm,''),1) = 'L' then 'LB'&#xA;&#x9;&#x9;&#x9;&#x9;when Left(IsNull(WQOD.Wt_Qual_Norm,''),1) = 'K' then 'KG'&#xA;&#x9;&#x9;&#x9;&#x9;else null&#xA;&#x9;&#x9;&#x9;end as 'Wt_Qual_Norm'&#xA;&#x9;&#x9;, case &#xA;&#x9;&#x9;&#x9;&#x9;when Left(IsNull(f.FB_WT_QUAL,''),1)= 'L' then 'Source Qual is Lb'&#xA;&#x9;&#x9;&#x9;&#x9;when Left(IsNull(f.FB_WT_QUAL,''),1)= 'K' then 'Source Qual is Kg'&#xA;&#x9;&#x9;&#x9;&#x9;when Left(IsNull(f.FB_WT_QUAL,''),1)= 'T' then 'Source Qual is Tn'&#xA;&#x9;&#x9;&#x9;&#x9;when (IsNull(f.FB_WT_QUAL,'') like '%LB%' &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;or IsNull(f.FB_WT_QUAL,'') like '%POUND%' &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;or IsNull(f.FB_WT_QUAL,'') like '%#%') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  then 'Source Qual is Lb Alias'&#xA;&#x9;&#x9;&#x9;&#x9;when (IsNull(f.FB_WT_QUAL,'') like '%KG%' &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;or IsNull(f.FB_WT_QUAL,'') like '%KILO%') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  then 'Source Qual is Kg Alias'&#xA;&#x9;&#x9;&#x9;&#x9;when Left(IsNull(WQSD.Wt_Qual_Norm,''),1) = 'L' then 'SCAC Default Qual is Lb'&#xA;&#x9;&#x9;&#x9;&#x9;when Left(IsNull(WQSD.Wt_Qual_Norm,''),1) = 'K' then 'SCAC Default Qual is Kg'&#xA;&#x9;&#x9;&#x9;&#x9;when (isnull(f.AL_CNTRY_CODE_ORIG,'') in ('US','USA','CA','CANADA','UNITED STATES') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;or isnull(f.AL_CNTRY_CODE_DEST,'') in ('US','USA','CA','CANADA','UNITED STATES')) &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  and isnull(i.AL_CNTRY_CODE_BLNG,'') in ('US','USA','CA','CANADA','UNITED STATES') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  and i.AL_CNTRY_CODE_BLNG is not null &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  then 'Orig/Dest/BillTo Cntry is US or CA = Lb'&#xA;&#x9;&#x9;&#x9;&#x9;when (isnull(f.AL_CNTRY_CODE_ORIG,'') in ('US','USA','CA','CANADA','UNITED STATES') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;or isnull(f.AL_CNTRY_CODE_DEST,'') in ('US','USA','CA','CANADA','UNITED STATES')) &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  and isnull(i.AL_CNTRY_CODE_BLNG,'') not in ('US','USA','CA','CANADA','UNITED STATES') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  and i.AL_CNTRY_CODE_BLNG is not null &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  then 'Orig/Dest Cntry is US or CA and BillTo &lt;&gt; US or CA = Kg'&#xA;&#x9;&#x9;&#x9;&#x9;when (isnull(f.AL_CNTRY_CODE_ORIG,'') in ('US','USA','CA','CANADA','UNITED STATES') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;or isnull(f.AL_CNTRY_CODE_DEST,'') in ('US','USA','CA','CANADA','UNITED STATES')) &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  and isnull(WQOD.Wt_Qual_Norm,'') = 'L'&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  then 'Orig/Dest Cntry is US or CA and Bill To Default is L = Lb'&#xA;&#x9;&#x9;&#x9;&#x9;when (isnull(f.AL_CNTRY_CODE_ORIG,'') in ('US','USA','CA','CANADA','UNITED STATES') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;or isnull(f.AL_CNTRY_CODE_DEST,'') in ('US','USA','CA','CANADA','UNITED STATES')) &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  and isnull(WQOD.Wt_Qual_Norm,'') = 'K' &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  then 'Orig/Dest Cntry is US or CA and Bill To Default is K = Kg'&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;when (isnull(f.AL_CNTRY_CODE_ORIG,'') not in ('US','USA','CA','CANADA','UNITED STATES') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  and isnull(f.AL_CNTRY_CODE_DEST,'') not in ('US','USA','CA','CANADA','UNITED STATES')) &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  and f.AL_CNTRY_CODE_ORIG is not null &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  and f.AL_CNTRY_CODE_DEST is not null &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  then 'Orig/Dest Cntry Not Null and &lt;&gt; US or CA = Kg'&#xA;&#x9;&#x9;&#x9;&#x9;when Left(IsNull(WQOD.Wt_Qual_Norm,''),1) = 'L' then 'Owner_Default_Qual is Lb'&#xA;&#x9;&#x9;&#x9;&#x9;when Left(IsNull(WQOD.Wt_Qual_Norm,''),1) = 'K' then 'Owner_Default_Qual is Kg'&#xA;&#x9;&#x9;&#x9;&#x9;else null&#xA;&#x9;&#x9;&#x9;end&#x9;as 'Wt_Qual_Method'&#x9;&#xA;&#x9;from applestage.dbo.all_fbs_pd f (nolock) -- with clause error&#xA;&#x9;&#x9;&#x9;inner join dw.vendor v (nolock)&#xA;&#x9;&#x9;&#x9;&#x9;on f.owner_key = v.owner_key &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;and f.vend_labl = v.vend_labl and v.isdeleted = 0&#xA;&#x9;&#x9;&#x9;inner join dw.invoice i (nolock)&#xA;&#x9;&#x9;&#x9;&#x9;on f.inv_id = i.inv_id&#xA;&#x9;&#x9;&#x9;left join [DATAVALIDATION].WTQUAL_SCAC_DEFAULTS WQSD (nolock) &#xA;&#x9;&#x9;&#x9;&#x9;on f.VEND_LABL = WQSD.VEND_LABL&#xA;&#x9;&#x9;&#x9;left join [DATAVALIDATION].WTQUAL_OWNER_DEFAULTS WQOD (nolock)&#xA;&#x9;&#x9;&#x9;&#x9;on f.OWNER_KEY = WQOD.OwnerKey" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\WTQualBase"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{20D694BD-358F-4548-8D33-262D6BEF0BB0}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="WTQualBase"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{88FD9220-7C37-44B2-987A-D7421673D119}"
+          SQLTask:SqlStatementSource="insert into applestage.dbo.WtQualBase&#xA;select * &#xA;&#x9;from applestage.dbo.TEMP_WtQualBase &#xA;&#x9;where fb_wt_qual &lt;&gt; wt_qual_norm" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 19]"
+      DTS:CreationName=""
+      DTS:DTSID="{38692E5F-3C13-4707-841C-39A2AB1F5DAE}"
+      DTS:From="Package\Get Paid Info"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 19"
+      DTS:To="Package\All fbs pd" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 20]"
+      DTS:CreationName=""
+      DTS:DTSID="{417500C2-14C7-414B-8939-963068D42037}"
+      DTS:From="Package\All fbs pd"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 20"
+      DTS:To="Package\Temp_wtqualbase" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 21]"
+      DTS:CreationName=""
+      DTS:DTSID="{F3892A45-E371-4DCD-84B5-7512CCCD0C38}"
+      DTS:From="Package\Temp_wtqualbase"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 21"
+      DTS:To="Package\WTQualBase" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 22]"
+      DTS:CreationName=""
+      DTS:DTSID="{146D9CA7-C2A7-48A5-97F7-1CBF55A1B66A}"
+      DTS:From="Package\WTQualBase"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 22"
+      DTS:To="Package\Mode1" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 23]"
+      DTS:CreationName=""
+      DTS:DTSID="{522CCE5D-1182-49F3-9121-C3F698D0D005}"
+      DTS:From="Package\Mode1"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 23"
+      DTS:To="Package\ModeBase2" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 24]"
+      DTS:CreationName=""
+      DTS:DTSID="{D051B5C5-01C3-4FB2-9794-1C197C9EA78D}"
+      DTS:From="Package\ModeBase2"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 24"
+      DTS:To="Package\ModeBase" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 25]"
+      DTS:CreationName=""
+      DTS:DTSID="{B73D5328-7F02-4091-9046-251A3DC6AFE4}"
+      DTS:From="Package\ModeBase"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 25"
+      DTS:To="Package\Get Custome Values" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 26]"
+      DTS:CreationName=""
+      DTS:DTSID="{7505CD57-D818-468D-8BDE-734D9C9BE4A4}"
+      DTS:From="Package\freight_bill"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 26"
+      DTS:To="Package\freight_bill_lines" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 27]"
+      DTS:CreationName=""
+      DTS:DTSID="{72A55F8F-373C-4458-8B05-B5F16AE7CA8E}"
+      DTS:From="Package\freight_bill_lines"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 27"
+      DTS:To="Package\Cost Allocation" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 28]"
+      DTS:CreationName=""
+      DTS:DTSID="{389279C1-37AD-4932-B7B1-0DEDB08D3CC2}"
+      DTS:From="Package\Clear Staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 28"
+      DTS:To="Package\Get Paid Info" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 29]"
+      DTS:CreationName=""
+      DTS:DTSID="{F2B34184-91C1-4353-8A9B-DF2BD8514C48}"
+      DTS:From="Package\Get Custome Values"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 29"
+      DTS:To="Package\freight_bill" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="125,42"
+          Id="Package\All fbs pd"
+          TopLeft="75.875,199" />
+        <NodeLayout
+          Size="144,42"
+          Id="Package\Clear Staging"
+          TopLeft="66.375,57" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Cost Allocation"
+          TopLeft="63.375,906" />
+        <NodeLayout
+          Size="131,42"
+          Id="Package\freight_bill"
+          TopLeft="72.875,744" />
+        <NodeLayout
+          Size="158,42"
+          Id="Package\freight_bill_lines"
+          TopLeft="59.375,825" />
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Get Custome Values"
+          TopLeft="50.375,663" />
+        <NodeLayout
+          Size="143,42"
+          Id="Package\Get Paid Info"
+          TopLeft="66.875,128" />
+        <NodeLayout
+          Size="112,42"
+          Id="Package\Mode1"
+          TopLeft="82.375,429" />
+        <NodeLayout
+          Size="129,42"
+          Id="Package\ModeBase"
+          TopLeft="73.875,582" />
+        <NodeLayout
+          Size="135,42"
+          Id="Package\ModeBase2"
+          TopLeft="70.875,509" />
+        <NodeLayout
+          Size="167,42"
+          Id="Package\Temp_wtqualbase"
+          TopLeft="54.875,278" />
+        <NodeLayout
+          Size="141,42"
+          Id="Package\WTQualBase"
+          TopLeft="67.875,350" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 19]"
+          TopLeft="138.375,170">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29"
+              Start="0,0"
+              End="0,21.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 20]"
+          TopLeft="138.375,241">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37"
+              Start="0,0"
+              End="0,29.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 21]"
+          TopLeft="138.375,320">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30"
+              Start="0,0"
+              End="0,22.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 22]"
+          TopLeft="138.375,392">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37"
+              Start="0,0"
+              End="0,29.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 23]"
+          TopLeft="138.375,471">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38"
+              Start="0,0"
+              End="0,30.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 24]"
+          TopLeft="138.375,551">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,31"
+              Start="0,0"
+              End="0,23.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 25]"
+          TopLeft="138.375,624">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39"
+              Start="0,0"
+              End="0,31.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 26]"
+          TopLeft="138.375,786">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39"
+              Start="0,0"
+              End="0,31.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 27]"
+          TopLeft="138.375,867">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39"
+              Start="0,0"
+              End="0,31.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 28]"
+          TopLeft="138.375,99">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29"
+              Start="0,0"
+              End="0,21.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 29]"
+          TopLeft="138.375,705">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39"
+              Start="0,0"
+              End="0,31.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

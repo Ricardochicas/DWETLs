@@ -1,0 +1,427 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/1/2015 6:42:09 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="SQL0"
+  DTS:CreatorName="FILEX\scott.harris"
+  DTS:DTSID="{B89D917D-5510-4B11-9E85-E5390D970A1F}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.5058.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="RestoreToProd"
+  DTS:PackageType="5"
+  DTS:VersionBuild="15"
+  DTS:VersionGUID="{9D58A2FF-CAA8-4A88-A337-B2103828DC60}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C56B2801-B3E4-4E0E-929E-ED29E3443146}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="BackupFilePath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\sql1\Backup\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8D8CFB34-B3A8-4A94-8474-3EF6948F6420}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="BackupName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1DF785D6-CB96-4406-A83D-B7C656F8F6D1}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::BackupFilePath]+ @[User::BackupName]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DeleteFilePath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\sql1\Backup\</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Apply permissions"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{331DFF4C-B2CC-4E9F-B9DE-E1128091EC4F}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Apply permissions"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{54F0C419-4A60-4DD3-B533-371C77BD402C}"
+          SQLTask:SqlStatementSource="CREATE USER [FILEX\Heather.Sinkwitz] FOR LOGIN [FILEX\Heather.Sinkwitz] WITH DEFAULT_SCHEMA=[dbo];&#xA;CREATE USER [FILEX\Justin.Hinckfoot] FOR LOGIN [FILEX\Justin.Hinckfoot] WITH DEFAULT_SCHEMA=[dbo];&#xA;CREATE USER [FILEX\andrew.bourne] FOR LOGIN [FILEX\andrew.bourne] WITH DEFAULT_SCHEMA=[dbo];&#xA;EXEC sp_addrolemember N'db_datareader', N'FILEX\Heather.Sinkwitz';&#xA;EXEC sp_addrolemember N'db_datareader', N'FILEX\Justin.Hinckfoot';&#xA;EXEC sp_addrolemember N'db_datareader', N'FILEX\andrew.bourne';" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Backup AppleStar to SQL1"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{E3610960-093A-4932-AEB9-FDC549A36CB9}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Backup AppleStar to SQL1"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{93932981-F1DC-48C8-B8FC-2E1833DF8FF9}"
+          SQLTask:SqlStatementSource="declare @backupfile nvarchar(2000)&#xA;&#xA;set @backupfile = N'\\sql1\Backup\'+?&#xA;&#xA;BACKUP DATABASE [AppleStar] TO DISK = @backupfile&#xA;WITH COMPRESSION" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="@BackupName"
+            SQLTask:DtsVariableName="User::BackupName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Delete Backup File"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.FileSystemTask.FileSystemTask, Microsoft.SqlServer.FileSystemTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="File System Task"
+      DTS:DTSID="{5BDCDF5C-AD8B-4014-8A0E-C45C6945D9F4}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.FileSystemTask.FileSystemTask, Microsoft.SqlServer.FileSystemTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Delete Backup File"
+      DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FileSystemData
+          TaskOperationType="DeleteFile"
+          TaskSourcePath="User::DeleteFilePath"
+          TaskIsSourceVariable="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Restore backup on sql1"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{920C5620-9F59-41FB-A7CA-18723F755E54}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Restore backup on sql1"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{795CE114-4E90-465C-A336-37DC0D94993A}"
+          SQLTask:SqlStatementSource="declare @backupfile nvarchar(500)&#xA;&#x9;&#x9;,@DataFileName nvarchar(256)&#xA;&#x9;&#x9;,@LogFileName nvarchar(256)&#xA;&#xA;set @backupfile = N'\\sql1\Backup\'+?&#xA;&#xA;set @DataFileName = 'D:\MSSQL\DATA\'+REPLACE(REPLACE(@backupfile, '.BAK','')+'.mdf','\\sql1\Backup\','')&#xA;set @LogFileName = 'E:\MSSQL\LOG\'+REPLACE(REPLACE(@backupfile, '.BAK','')+'_log.ldf','\\sql1\Backup\','')&#xA;&#xA;print @DataFileName&#xA;print @LogFileName&#xA;&#xA;RESTORE DATABASE [AppleStarBackup] FROM DISK = @backupfile &#xA;   WITH MOVE 'AppleStar' TO @DataFileName,&#xA;   MOVE 'AppleStar_Log' TO @LogFileName,&#xA;&#x9;REPLACE;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="@BackupName"
+            SQLTask:DtsVariableName="User::BackupName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Set Backup Name"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{0F82AB4C-328E-4806-9E81-FAEC6B488A04}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Set Backup Name"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{93932981-F1DC-48C8-B8FC-2E1833DF8FF9}"
+          SQLTask:SqlStatementSource="select N'AppleStar_' + REPLACE(replace(replace(convert(nvarchar(50), getdate(), 120), ' ','_'), '-','_'),':','') + N'.BAK'&#xA;"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::BackupName" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Switch Backup to prod"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{5DEF2E41-CA5D-49FD-8A46-937CB7B82321}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Switch Backup to prod"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{795CE114-4E90-465C-A336-37DC0D94993A}"
+          SQLTask:SqlStatementSource="--Rename current Star to StarOld&#xA;ALTER DATABASE AppleStar &#xA;SET SINGLE_USER &#xA;WITH ROLLBACK IMMEDIATE&#xA;GO&#xA;ALTER DATABASE AppleStar&#xA;Modify Name = AppleStarOld ;&#xA;GO&#xA;ALTER DATABASE AppleStarOld &#xA;SET MULTI_USER &#xA;GO&#xA;&#xA;--Rename ProcessStar to STar to set it as the production database.&#xA;ALTER DATABASE AppleStarBackup &#xA;SET SINGLE_USER &#xA;WITH ROLLBACK IMMEDIATE&#xA;GO&#xA;ALTER DATABASE AppleStarBackup&#xA;Modify Name = AppleStar ;&#xA;GO&#xA;ALTER DATABASE AppleStar &#xA;SET MULTI_USER &#xA;GO&#xA;&#xA;--Remove HPStarOld&#xA;ALTER DATABASE AppleStarOld &#xA;SET SINGLE_USER &#xA;WITH ROLLBACK IMMEDIATE&#xA;GO&#xA;&#xA;drop database AppleStarOld;&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{BA954461-31B3-493C-905A-C83215E15ABD}"
+      DTS:From="Package\Set Backup Name"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Backup AppleStar to SQL1" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{EFBAC944-4A09-4391-B92A-F72C6341802A}"
+      DTS:From="Package\Backup AppleStar to SQL1"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Restore backup on sql1" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{5936CFDB-85BF-429B-BD59-6BE1739CD91A}"
+      DTS:From="Package\Restore backup on sql1"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Switch Backup to prod" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{E6FEE4F0-BF79-4C1F-A37D-D8244C642A89}"
+      DTS:From="Package\Switch Backup to prod"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Apply permissions" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{94286984-81EB-466A-B607-8FFF5A249FCD}"
+      DTS:From="Package\Apply permissions"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Delete Backup File" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Apply permissions"
+          TopLeft="274,427" />
+        <NodeLayout
+          Size="202,42"
+          Id="Package\Backup AppleStar to SQL1"
+          TopLeft="148,153" />
+        <NodeLayout
+          Size="166,42"
+          Id="Package\Delete Backup File"
+          TopLeft="337,494" />
+        <NodeLayout
+          Size="189,42"
+          Id="Package\Restore backup on sql1"
+          TopLeft="183,251" />
+        <NodeLayout
+          Size="162,42"
+          Id="Package\Set Backup Name"
+          TopLeft="123,63" />
+        <NodeLayout
+          Size="184,42"
+          Id="Package\Switch Backup to prod"
+          TopLeft="215,343" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="204,105">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="45,48"
+              Start="0,0"
+              End="45,40.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20"
+                    Point2="0,24"
+                    Point3="4,24" />
+                  <mssgle:LineSegment
+                    End="41,24" />
+                  <mssgle:CubicBezierSegment
+                    Point1="41,24"
+                    Point2="45,24"
+                    Point3="45,28" />
+                  <mssgle:LineSegment
+                    End="45,40.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="249,195">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="28.5,56"
+              Start="0,0"
+              End="28.5,48.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24"
+                    Point2="0,28"
+                    Point3="4,28" />
+                  <mssgle:LineSegment
+                    End="24.5,28" />
+                  <mssgle:CubicBezierSegment
+                    Point1="24.5,28"
+                    Point2="28.5,28"
+                    Point3="28.5,32" />
+                  <mssgle:LineSegment
+                    End="28.5,48.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="277.5,293">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="29.5,50"
+              Start="0,0"
+              End="29.5,42.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21"
+                    Point2="0,25"
+                    Point3="4,25" />
+                  <mssgle:LineSegment
+                    End="25.5,25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="25.5,25"
+                    Point2="29.5,25"
+                    Point3="29.5,29" />
+                  <mssgle:LineSegment
+                    End="29.5,42.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="307,385">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="48.5,42"
+              Start="0,0"
+              End="48.5,34.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17"
+                    Point2="0,21"
+                    Point3="4,21" />
+                  <mssgle:LineSegment
+                    End="44.5,21" />
+                  <mssgle:CubicBezierSegment
+                    Point1="44.5,21"
+                    Point2="48.5,21"
+                    Point3="48.5,25" />
+                  <mssgle:LineSegment
+                    End="48.5,34.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="355.5,469">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="64.5,25"
+              Start="0,0"
+              End="64.5,17.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,8.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,8.5"
+                    Point2="0,12.5"
+                    Point3="4,12.5" />
+                  <mssgle:LineSegment
+                    End="60.5,12.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="60.5,12.5"
+                    Point2="64.5,12.5"
+                    Point3="64.5,16.5" />
+                  <mssgle:LineSegment
+                    End="64.5,17.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,1867 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/18/2015 10:17:45 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="SQL0"
+  DTS:CreatorName="FILEX\scott.harris"
+  DTS:DTSID="{6020EE62-B618-49B7-AF95-C71B52CE7A1B}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.5058.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="GetDateForDelete"
+  DTS:PackageType="5"
+  DTS:VersionBuild="14"
+  DTS:VersionGUID="{003806D5-CA5F-4E88-9A2D-7EDCA393CD48}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Get CA_ELEM for delete"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{0211A070-3CEC-4E36-A72B-5AD085B6EB8D}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get CA_ELEM for delete"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Get CA_ELEM for delete\Data Conversion"
+              componentClassID="{62B1106C-7DB8-4EC8-ADD6-4C664DFFC54A}"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Get CA_ELEM for delete\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Get CA_ELEM for delete\Data Conversion.Inputs[Data Conversion Input].Columns[Master Fb Id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="23"
+                      cachedName="Master Fb Id"
+                      lineageId="Package\Get CA_ELEM for delete\Get CaElem for Delete.Outputs[OLE DB Source Output].Columns[Master Fb Id]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Get CA_ELEM for delete\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Get CA_ELEM for delete\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get CA_ELEM for delete\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Master Fb Id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="23"
+                      lineageId="Package\Get CA_ELEM for delete\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Master Fb Id]"
+                      name="Copy of Master Fb Id"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Get CA_ELEM for delete\Get CaElem for Delete.Outputs[OLE DB Source Output].Columns[Master Fb Id]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Get CA_ELEM for delete\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Get CA_ELEM for delete\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get CA_ELEM for delete\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Get CA_ELEM for delete\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Get CA_ELEM for delete\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Get CA_ELEM for delete\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Get CA_ELEM for delete\Get CaElem for Delete"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Get CaElem for Delete"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select UNT_ID as [Master Fb Id], CA_LINE_NUM as [CA Line Number]
+from DW.CA_ELEM WITH (NOLOCK)
+where UpdateDate &gt; DATEADD(hh, -17,DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())))
+and (UNT_ID like 'FBLL1000950%' or UNT_ID like 'FBLL1000920%' or UNT_ID like 'FBLL1000900%')
+union
+select  UNT_ID as [Master Fb Id], CA_LINE_NUM as [CA Line Number]
+from DW.CA_ELEM a WITH (NOLOCK)
+inner join applestage.dbo.deletefbid b on b.fbid = a.unt_id</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Get CA_ELEM for delete\Get CaElem for Delete.Connections[OleDbConnection]"
+                  connectionManagerID="{F76FFFCF-155D-4F5B-876C-FF8B5E38CC70}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SQL0.TraxDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Get CA_ELEM for delete\Get CaElem for Delete.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get CA_ELEM for delete\Get CaElem for Delete.Outputs[OLE DB Source Output].Columns[Master Fb Id]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get CA_ELEM for delete\Get CaElem for Delete.Outputs[OLE DB Source Output].ExternalColumns[Master Fb Id]"
+                      length="23"
+                      lineageId="Package\Get CA_ELEM for delete\Get CaElem for Delete.Outputs[OLE DB Source Output].Columns[Master Fb Id]"
+                      name="Master Fb Id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Get CA_ELEM for delete\Get CaElem for Delete.Outputs[OLE DB Source Output].Columns[CA Line Number]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get CA_ELEM for delete\Get CaElem for Delete.Outputs[OLE DB Source Output].ExternalColumns[CA Line Number]"
+                      lineageId="Package\Get CA_ELEM for delete\Get CaElem for Delete.Outputs[OLE DB Source Output].Columns[CA Line Number]"
+                      name="CA Line Number"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Get CA_ELEM for delete\Get CaElem for Delete.Outputs[OLE DB Source Output].ExternalColumns[Master Fb Id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="23"
+                      name="Master Fb Id" />
+                    <externalMetadataColumn
+                      refId="Package\Get CA_ELEM for delete\Get CaElem for Delete.Outputs[OLE DB Source Output].ExternalColumns[CA Line Number]"
+                      dataType="i2"
+                      name="CA Line Number" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Get CA_ELEM for delete\Get CaElem for Delete.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get CA_ELEM for delete\Get CaElem for Delete.Outputs[OLE DB Source Error Output].Columns[Master Fb Id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="23"
+                      lineageId="Package\Get CA_ELEM for delete\Get CaElem for Delete.Outputs[OLE DB Source Error Output].Columns[Master Fb Id]"
+                      name="Master Fb Id" />
+                    <outputColumn
+                      refId="Package\Get CA_ELEM for delete\Get CaElem for Delete.Outputs[OLE DB Source Error Output].Columns[CA Line Number]"
+                      dataType="i2"
+                      lineageId="Package\Get CA_ELEM for delete\Get CaElem for Delete.Outputs[OLE DB Source Error Output].Columns[CA Line Number]"
+                      name="CA Line Number" />
+                    <outputColumn
+                      refId="Package\Get CA_ELEM for delete\Get CaElem for Delete.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Get CA_ELEM for delete\Get CaElem for Delete.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Get CA_ELEM for delete\Get CaElem for Delete.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Get CA_ELEM for delete\Get CaElem for Delete.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Get CA_ELEM for delete\Load CaElem SQL0"
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Load CaElem SQL0"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DeleteCaElem]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Get CA_ELEM for delete\Load CaElem SQL0.Connections[OleDbConnection]"
+                  connectionManagerID="{2139FD49-4A13-423A-B1BC-DE63A998D62B}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SQL0.AppleStage]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Get CA_ELEM for delete\Load CaElem SQL0.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Get CA_ELEM for delete\Load CaElem SQL0.Inputs[OLE DB Destination Input].Columns[CA Line Number]"
+                      cachedDataType="i2"
+                      cachedName="CA Line Number"
+                      externalMetadataColumnId="Package\Get CA_ELEM for delete\Load CaElem SQL0.Inputs[OLE DB Destination Input].ExternalColumns[LineNumber]"
+                      lineageId="Package\Get CA_ELEM for delete\Get CaElem for Delete.Outputs[OLE DB Source Output].Columns[CA Line Number]" />
+                    <inputColumn
+                      refId="Package\Get CA_ELEM for delete\Load CaElem SQL0.Inputs[OLE DB Destination Input].Columns[Master Fb Id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="23"
+                      cachedName="Master Fb Id"
+                      externalMetadataColumnId="Package\Get CA_ELEM for delete\Load CaElem SQL0.Inputs[OLE DB Destination Input].ExternalColumns[FbId]"
+                      lineageId="Package\Get CA_ELEM for delete\Get CaElem for Delete.Outputs[OLE DB Source Output].Columns[Master Fb Id]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Get CA_ELEM for delete\Load CaElem SQL0.Inputs[OLE DB Destination Input].ExternalColumns[FbId]"
+                      codePage="1252"
+                      dataType="str"
+                      length="23"
+                      name="FbId" />
+                    <externalMetadataColumn
+                      refId="Package\Get CA_ELEM for delete\Load CaElem SQL0.Inputs[OLE DB Destination Input].ExternalColumns[LineNumber]"
+                      dataType="i4"
+                      name="LineNumber" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Get CA_ELEM for delete\Load CaElem SQL0.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Get CA_ELEM for delete\Load CaElem SQL0.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get CA_ELEM for delete\Load CaElem SQL0.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Get CA_ELEM for delete\Load CaElem SQL0.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Get CA_ELEM for delete\Load CaElem SQL0.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Get CA_ELEM for delete\Load CaElem SQL0.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Get CA_ELEM for delete\Multicast"
+              componentClassID="{EC139FBC-694E-490B-8EA7-35690FB0F445}"
+              contactInfo="Multicast;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Distributes every input row to every row in one or more outputs. For example, branch your data flow to make a copy of data so that some values can be masked before sharing with external partners."
+              name="Multicast">
+              <inputs>
+                <input
+                  refId="Package\Get CA_ELEM for delete\Multicast.Inputs[Multicast Input 1]"
+                  name="Multicast Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Get CA_ELEM for delete\Multicast.Outputs[Multicast Output 2]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 2"
+                  synchronousInputId="Package\Get CA_ELEM for delete\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Get CA_ELEM for delete\Multicast.Outputs[Multicast Output 3]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 3"
+                  synchronousInputId="Package\Get CA_ELEM for delete\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Get CA_ELEM for delete.Paths[Data Conversion Output]"
+              endId="Package\Get CA_ELEM for delete\Multicast.Inputs[Multicast Input 1]"
+              name="Data Conversion Output"
+              startId="Package\Get CA_ELEM for delete\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Get CA_ELEM for delete.Paths[Multicast Output 2]"
+              endId="Package\Get CA_ELEM for delete\Load CaElem SQL0.Inputs[OLE DB Destination Input]"
+              name="Multicast Output 2"
+              startId="Package\Get CA_ELEM for delete\Multicast.Outputs[Multicast Output 2]" />
+            <path
+              refId="Package\Get CA_ELEM for delete.Paths[OLE DB Source Output]"
+              endId="Package\Get CA_ELEM for delete\Data Conversion.Inputs[Data Conversion Input]"
+              name="OLE DB Source Output"
+              startId="Package\Get CA_ELEM for delete\Get CaElem for Delete.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get Distinct FB_ID"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{F60CAF33-38A8-4AF2-9F42-E4E087923D65}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get Distinct FB_ID"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Get Distinct FB_ID\Convert FBID"
+              componentClassID="{62B1106C-7DB8-4EC8-ADD6-4C664DFFC54A}"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Convert FBID"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Get Distinct FB_ID\Convert FBID.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Get Distinct FB_ID\Convert FBID.Inputs[Data Conversion Input].Columns[fb_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="23"
+                      cachedName="fb_id"
+                      lineageId="Package\Get Distinct FB_ID\Get distinct FB_ID.Outputs[OLE DB Source Output].Columns[fb_id]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Get Distinct FB_ID\Convert FBID.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Get Distinct FB_ID\Convert FBID.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get Distinct FB_ID\Convert FBID.Outputs[Data Conversion Output].Columns[Copy of fb_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="23"
+                      lineageId="Package\Get Distinct FB_ID\Convert FBID.Outputs[Data Conversion Output].Columns[Copy of fb_id]"
+                      name="Copy of fb_id"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Get Distinct FB_ID\Get distinct FB_ID.Outputs[OLE DB Source Output].Columns[fb_id]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Get Distinct FB_ID\Convert FBID.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Get Distinct FB_ID\Convert FBID.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get Distinct FB_ID\Convert FBID.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Get Distinct FB_ID\Convert FBID.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Get Distinct FB_ID\Convert FBID.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Get Distinct FB_ID\Convert FBID.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Get Distinct FB_ID\Get distinct FB_ID"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Get distinct FB_ID"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select fb_id from [DW].[FRGHT_BL] WITH (NOLOCK)
+where UpdateDate &gt; DATEADD(hh, -24,DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())))
+and (fb_id like 'FBLL1000950%' or fb_id like 'FBLL1000920%' or fb_id like 'FBLL1000900%') 
+union
+select fb_id from [DW].[FRGHT_BL_EXT] WITH (NOLOCK)
+where UpdateDate &gt; DATEADD(hh, -24,DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())))
+and (fb_id like 'FBLL1000950%' or fb_id like 'FBLL1000920%' or fb_id like 'FBLL1000900%') 
+union
+select fb_id from [DW].[REMITDTL] WITH (NOLOCK)
+where UpdateDate &gt; DATEADD(hh, -24,DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())))
+and (fb_id like 'FBLL1000950%' or fb_id like 'FBLL1000920%' or fb_id like 'FBLL1000900%')
+union
+select fb_id from [DW].[payr_dtl] WITH (NOLOCK)
+where UpdateDate &gt; DATEADD(hh, -24,DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())))
+and (fb_id like 'FBLL1000950%' or fb_id like 'FBLL1000920%' or fb_id like 'FBLL1000900%')
+union
+select fb_id from [DW].[exceptions] WITH (NOLOCK)
+where UpdateDate &gt; DATEADD(hh, -24,DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())))
+and (fb_id like 'FBLL1000950%' or fb_id like 'FBLL1000920%' or fb_id like 'FBLL1000900%')
+union
+select distinct fbid fb_id from [DW].fbnorm WITH (NOLOCK)
+where UpdateDate &gt; DATEADD(hh, -24,DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())))
+and (fbid like 'FBLL1000950%' or fbid like 'FBLL1000920%' or fbid like 'FBLL1000900%')</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Get Distinct FB_ID\Get distinct FB_ID.Connections[OleDbConnection]"
+                  connectionManagerID="{F76FFFCF-155D-4F5B-876C-FF8B5E38CC70}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SQL0.TraxDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Get Distinct FB_ID\Get distinct FB_ID.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get Distinct FB_ID\Get distinct FB_ID.Outputs[OLE DB Source Output].Columns[fb_id]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get Distinct FB_ID\Get distinct FB_ID.Outputs[OLE DB Source Output].ExternalColumns[fb_id]"
+                      length="23"
+                      lineageId="Package\Get Distinct FB_ID\Get distinct FB_ID.Outputs[OLE DB Source Output].Columns[fb_id]"
+                      name="fb_id"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Get Distinct FB_ID\Get distinct FB_ID.Outputs[OLE DB Source Output].ExternalColumns[fb_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="23"
+                      name="fb_id" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Get Distinct FB_ID\Get distinct FB_ID.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get Distinct FB_ID\Get distinct FB_ID.Outputs[OLE DB Source Error Output].Columns[fb_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="23"
+                      lineageId="Package\Get Distinct FB_ID\Get distinct FB_ID.Outputs[OLE DB Source Error Output].Columns[fb_id]"
+                      name="fb_id" />
+                    <outputColumn
+                      refId="Package\Get Distinct FB_ID\Get distinct FB_ID.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Get Distinct FB_ID\Get distinct FB_ID.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Get Distinct FB_ID\Get distinct FB_ID.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Get Distinct FB_ID\Get distinct FB_ID.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Get Distinct FB_ID\Insert DeleteFbId SQL0"
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insert DeleteFbId SQL0"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DeleteFbId]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Get Distinct FB_ID\Insert DeleteFbId SQL0.Connections[OleDbConnection]"
+                  connectionManagerID="{2139FD49-4A13-423A-B1BC-DE63A998D62B}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SQL0.AppleStage]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Get Distinct FB_ID\Insert DeleteFbId SQL0.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Get Distinct FB_ID\Insert DeleteFbId SQL0.Inputs[OLE DB Destination Input].Columns[fb_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="23"
+                      cachedName="fb_id"
+                      externalMetadataColumnId="Package\Get Distinct FB_ID\Insert DeleteFbId SQL0.Inputs[OLE DB Destination Input].ExternalColumns[FbId]"
+                      lineageId="Package\Get Distinct FB_ID\Get distinct FB_ID.Outputs[OLE DB Source Output].Columns[fb_id]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Get Distinct FB_ID\Insert DeleteFbId SQL0.Inputs[OLE DB Destination Input].ExternalColumns[FbId]"
+                      codePage="1252"
+                      dataType="str"
+                      length="23"
+                      name="FbId" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Get Distinct FB_ID\Insert DeleteFbId SQL0.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Get Distinct FB_ID\Insert DeleteFbId SQL0.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get Distinct FB_ID\Insert DeleteFbId SQL0.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Get Distinct FB_ID\Insert DeleteFbId SQL0.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Get Distinct FB_ID\Insert DeleteFbId SQL0.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Get Distinct FB_ID\Insert DeleteFbId SQL0.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Get Distinct FB_ID\Multicast"
+              componentClassID="{EC139FBC-694E-490B-8EA7-35690FB0F445}"
+              contactInfo="Multicast;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Distributes every input row to every row in one or more outputs. For example, branch your data flow to make a copy of data so that some values can be masked before sharing with external partners."
+              name="Multicast">
+              <inputs>
+                <input
+                  refId="Package\Get Distinct FB_ID\Multicast.Inputs[Multicast Input 1]"
+                  name="Multicast Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Get Distinct FB_ID\Multicast.Outputs[Multicast Output 1]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 1"
+                  synchronousInputId="Package\Get Distinct FB_ID\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Get Distinct FB_ID\Multicast.Outputs[Multicast Output 3]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 3"
+                  synchronousInputId="Package\Get Distinct FB_ID\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Get Distinct FB_ID.Paths[Data Conversion Output]"
+              endId="Package\Get Distinct FB_ID\Multicast.Inputs[Multicast Input 1]"
+              name="Data Conversion Output"
+              startId="Package\Get Distinct FB_ID\Convert FBID.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Get Distinct FB_ID.Paths[Multicast Output 1]"
+              endId="Package\Get Distinct FB_ID\Insert DeleteFbId SQL0.Inputs[OLE DB Destination Input]"
+              name="Multicast Output 1"
+              startId="Package\Get Distinct FB_ID\Multicast.Outputs[Multicast Output 1]" />
+            <path
+              refId="Package\Get Distinct FB_ID.Paths[OLE DB Source Output]"
+              endId="Package\Get Distinct FB_ID\Convert FBID.Inputs[Data Conversion Input]"
+              name="OLE DB Source Output"
+              startId="Package\Get Distinct FB_ID\Get distinct FB_ID.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get FbLn for delete"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{8EC81447-7322-40E5-BB03-4B9AA42CAD33}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get FbLn for delete"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Get FbLn for delete\Data Conversion"
+              componentClassID="{62B1106C-7DB8-4EC8-ADD6-4C664DFFC54A}"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Get FbLn for delete\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Get FbLn for delete\Data Conversion.Inputs[Data Conversion Input].Columns[Master Fb Id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="23"
+                      cachedName="Master Fb Id"
+                      lineageId="Package\Get FbLn for delete\Get Distinct FbId and LN.Outputs[OLE DB Source Output].Columns[Master Fb Id]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Get FbLn for delete\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Get FbLn for delete\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get FbLn for delete\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Master Fb Id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="23"
+                      lineageId="Package\Get FbLn for delete\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Master Fb Id]"
+                      name="Copy of Master Fb Id"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Get FbLn for delete\Get Distinct FbId and LN.Outputs[OLE DB Source Output].Columns[Master Fb Id]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Get FbLn for delete\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Get FbLn for delete\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get FbLn for delete\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Get FbLn for delete\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Get FbLn for delete\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Get FbLn for delete\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Get FbLn for delete\DeleteFbLn SQL0"
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DeleteFbLn SQL0"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DeleteFbLn]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Get FbLn for delete\DeleteFbLn SQL0.Connections[OleDbConnection]"
+                  connectionManagerID="{2139FD49-4A13-423A-B1BC-DE63A998D62B}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SQL0.AppleStage]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Get FbLn for delete\DeleteFbLn SQL0.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Get FbLn for delete\DeleteFbLn SQL0.Inputs[OLE DB Destination Input].Columns[Line Item Number]"
+                      cachedDataType="i2"
+                      cachedName="Line Item Number"
+                      externalMetadataColumnId="Package\Get FbLn for delete\DeleteFbLn SQL0.Inputs[OLE DB Destination Input].ExternalColumns[LineNumber]"
+                      lineageId="Package\Get FbLn for delete\Get Distinct FbId and LN.Outputs[OLE DB Source Output].Columns[Line Item Number]" />
+                    <inputColumn
+                      refId="Package\Get FbLn for delete\DeleteFbLn SQL0.Inputs[OLE DB Destination Input].Columns[Master Fb Id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="23"
+                      cachedName="Master Fb Id"
+                      externalMetadataColumnId="Package\Get FbLn for delete\DeleteFbLn SQL0.Inputs[OLE DB Destination Input].ExternalColumns[FbId]"
+                      lineageId="Package\Get FbLn for delete\Get Distinct FbId and LN.Outputs[OLE DB Source Output].Columns[Master Fb Id]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Get FbLn for delete\DeleteFbLn SQL0.Inputs[OLE DB Destination Input].ExternalColumns[FbId]"
+                      codePage="1252"
+                      dataType="str"
+                      length="23"
+                      name="FbId" />
+                    <externalMetadataColumn
+                      refId="Package\Get FbLn for delete\DeleteFbLn SQL0.Inputs[OLE DB Destination Input].ExternalColumns[LineNumber]"
+                      dataType="i4"
+                      name="LineNumber" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Get FbLn for delete\DeleteFbLn SQL0.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Get FbLn for delete\DeleteFbLn SQL0.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get FbLn for delete\DeleteFbLn SQL0.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Get FbLn for delete\DeleteFbLn SQL0.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Get FbLn for delete\DeleteFbLn SQL0.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Get FbLn for delete\DeleteFbLn SQL0.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Get FbLn for delete\Get Distinct FbId and LN"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Get Distinct FbId and LN"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select fb_id as [Master Fb Id], LINE_ITEM_NUM as [Line Item Number]
+from DW.FB_LN WITH (NOLOCK)
+where UpdateDate &gt; DATEADD(hh, -24,DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())))
+and (fb_id like 'FBLL1000950%' or fb_id like 'FBLL1000920%' or fb_id like 'FBLL1000900%')
+UNION
+select  FB_ID as [Master Fb Id], LINE_ITEM_NUM as [CA Line Number]
+from DW.FB_LN a WITH (NOLOCK)
+inner join applestage.dbo.deletefbid b on b.fbid = a.FB_id</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Get FbLn for delete\Get Distinct FbId and LN.Connections[OleDbConnection]"
+                  connectionManagerID="{F76FFFCF-155D-4F5B-876C-FF8B5E38CC70}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SQL0.TraxDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Get FbLn for delete\Get Distinct FbId and LN.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get FbLn for delete\Get Distinct FbId and LN.Outputs[OLE DB Source Output].Columns[Master Fb Id]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get FbLn for delete\Get Distinct FbId and LN.Outputs[OLE DB Source Output].ExternalColumns[Master Fb Id]"
+                      length="23"
+                      lineageId="Package\Get FbLn for delete\Get Distinct FbId and LN.Outputs[OLE DB Source Output].Columns[Master Fb Id]"
+                      name="Master Fb Id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Get FbLn for delete\Get Distinct FbId and LN.Outputs[OLE DB Source Output].Columns[Line Item Number]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get FbLn for delete\Get Distinct FbId and LN.Outputs[OLE DB Source Output].ExternalColumns[Line Item Number]"
+                      lineageId="Package\Get FbLn for delete\Get Distinct FbId and LN.Outputs[OLE DB Source Output].Columns[Line Item Number]"
+                      name="Line Item Number"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Get FbLn for delete\Get Distinct FbId and LN.Outputs[OLE DB Source Output].ExternalColumns[Master Fb Id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="23"
+                      name="Master Fb Id" />
+                    <externalMetadataColumn
+                      refId="Package\Get FbLn for delete\Get Distinct FbId and LN.Outputs[OLE DB Source Output].ExternalColumns[Line Item Number]"
+                      dataType="i2"
+                      name="Line Item Number" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Get FbLn for delete\Get Distinct FbId and LN.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get FbLn for delete\Get Distinct FbId and LN.Outputs[OLE DB Source Error Output].Columns[Master Fb Id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="23"
+                      lineageId="Package\Get FbLn for delete\Get Distinct FbId and LN.Outputs[OLE DB Source Error Output].Columns[Master Fb Id]"
+                      name="Master Fb Id" />
+                    <outputColumn
+                      refId="Package\Get FbLn for delete\Get Distinct FbId and LN.Outputs[OLE DB Source Error Output].Columns[Line Item Number]"
+                      dataType="i2"
+                      lineageId="Package\Get FbLn for delete\Get Distinct FbId and LN.Outputs[OLE DB Source Error Output].Columns[Line Item Number]"
+                      name="Line Item Number" />
+                    <outputColumn
+                      refId="Package\Get FbLn for delete\Get Distinct FbId and LN.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Get FbLn for delete\Get Distinct FbId and LN.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Get FbLn for delete\Get Distinct FbId and LN.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Get FbLn for delete\Get Distinct FbId and LN.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Get FbLn for delete\Multicast"
+              componentClassID="{EC139FBC-694E-490B-8EA7-35690FB0F445}"
+              contactInfo="Multicast;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Distributes every input row to every row in one or more outputs. For example, branch your data flow to make a copy of data so that some values can be masked before sharing with external partners."
+              name="Multicast">
+              <inputs>
+                <input
+                  refId="Package\Get FbLn for delete\Multicast.Inputs[Multicast Input 1]"
+                  name="Multicast Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Get FbLn for delete\Multicast.Outputs[Multicast Output 1]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 1"
+                  synchronousInputId="Package\Get FbLn for delete\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Get FbLn for delete\Multicast.Outputs[Multicast Output 3]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 3"
+                  synchronousInputId="Package\Get FbLn for delete\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Get FbLn for delete.Paths[Data Conversion Output]"
+              endId="Package\Get FbLn for delete\Multicast.Inputs[Multicast Input 1]"
+              name="Data Conversion Output"
+              startId="Package\Get FbLn for delete\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Get FbLn for delete.Paths[Multicast Output 1]"
+              endId="Package\Get FbLn for delete\DeleteFbLn SQL0.Inputs[OLE DB Destination Input]"
+              name="Multicast Output 1"
+              startId="Package\Get FbLn for delete\Multicast.Outputs[Multicast Output 1]" />
+            <path
+              refId="Package\Get FbLn for delete.Paths[OLE DB Source Output]"
+              endId="Package\Get FbLn for delete\Data Conversion.Inputs[Data Conversion Input]"
+              name="OLE DB Source Output"
+              startId="Package\Get FbLn for delete\Get Distinct FbId and LN.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{829851D4-C101-4E1B-A7EE-10D028D037BE}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Truncate CDC Process b03"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:Disabled="True"
+          DTS:DTSID="{FBFBBFF6-DDBF-4B76-8BF5-CEFCA946A30E}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate CDC Process b03"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{123E5CBF-4A60-469A-A818-6FB593B3FAB9}"
+              SQLTask:SqlStatementSource="Truncate table [dbo].[CDCProcessCostAllocation];&#xA;Truncate table [dbo].[CDCProcessFreightBill];&#xA;Truncate table [dbo].[CDCProcessFreightBillLines];" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Truncate FbId SQL0"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{F57ECFE0-21D9-4842-9263-3A90FFD7D3D8}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate FbId SQL0"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{2139FD49-4A13-423A-B1BC-DE63A998D62B}"
+              SQLTask:SqlStatementSource="truncate table DeleteFbId;&#xA;truncate table DeleteCaElem;&#xA;truncate table DeleteFbLn;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{66F6A27E-5E8B-422E-866C-6F169E5D0FFA}"
+      DTS:From="Package\Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Get Distinct FB_ID" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{B5A2ECD5-B300-4060-ACCE-0025438778F4}"
+      DTS:From="Package\Get Distinct FB_ID"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Get CA_ELEM for delete" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{D4FD43B3-F36C-4862-950D-16AFFE6F6594}"
+      DTS:From="Package\Get CA_ELEM for delete"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Get FbLn for delete" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="191,42"
+          Id="Package\Get CA_ELEM for delete"
+          TopLeft="276,326" />
+        <NodeLayout
+          Size="166,42"
+          Id="Package\Get Distinct FB_ID"
+          TopLeft="265,239" />
+        <NodeLayout
+          Size="170,42"
+          Id="Package\Get FbLn for delete"
+          TopLeft="274,415" />
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Sequence Container\Truncate CDC Process b03"
+          TopLeft="18,24" />
+        <NodeLayout
+          Size="173,42"
+          Id="Package\Sequence Container\Truncate FbId SQL0"
+          TopLeft="248,24" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="446,132"
+          Size="446,175"
+          Id="Package\Sequence Container"
+          TopLeft="127,18" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="349,193">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46"
+              Start="0,0"
+              End="0,38.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="348,281">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="23.5,45"
+              Start="0,0"
+              End="23.5,37.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.5"
+                    Point2="0,22.5"
+                    Point3="4,22.5" />
+                  <mssgle:LineSegment
+                    End="19.5,22.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="19.5,22.5"
+                    Point2="23.5,22.5"
+                    Point3="23.5,26.5" />
+                  <mssgle:LineSegment
+                    End="23.5,37.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="371.5,368">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-12.5,47"
+              Start="0,0"
+              End="-12.5,39.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.5"
+                    Point2="0,23.5"
+                    Point3="-4,23.5" />
+                  <mssgle:LineSegment
+                    End="-8.5,23.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-8.5,23.5"
+                    Point2="-12.5,23.5"
+                    Point3="-12.5,27.5" />
+                  <mssgle:LineSegment
+                    End="-12.5,39.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Get CA_ELEM for delete">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="168,42"
+          Id="Package\Get CA_ELEM for delete\Load CaElem SQL0"
+          TopLeft="525,255" />
+        <NodeLayout
+          Size="183,42"
+          Id="Package\Get CA_ELEM for delete\Get CaElem for Delete"
+          TopLeft="367,24" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Get CA_ELEM for delete\Data Conversion"
+          TopLeft="389,93" />
+        <NodeLayout
+          Size="120,42"
+          Id="Package\Get CA_ELEM for delete\Multicast"
+          TopLeft="403,165" />
+        <EdgeLayout
+          Id="Package\Get CA_ELEM for delete.Paths[OLE DB Source Output]"
+          TopLeft="458.5,66">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="8.5,27"
+              Start="0,0"
+              End="8.5,19.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9.5"
+                    Point2="0,13.5"
+                    Point3="4,13.5" />
+                  <mssgle:LineSegment
+                    End="4.5,13.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="4.5,13.5"
+                    Point2="8.5,13.5"
+                    Point3="8.5,17.5" />
+                  <mssgle:LineSegment
+                    End="8.5,19.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Get CA_ELEM for delete.Paths[Multicast Output 2]"
+          TopLeft="481.666666666667,207">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="127.333333333333,48"
+              Start="0,0"
+              End="127.333333333333,40.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.5789473684211" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.5789473684211"
+                    Point2="0,19.5789473684211"
+                    Point3="4,19.5789473684211" />
+                  <mssgle:LineSegment
+                    End="123.333333333333,19.5789473684211" />
+                  <mssgle:CubicBezierSegment
+                    Point1="123.333333333333,19.5789473684211"
+                    Point2="127.333333333333,19.5789473684211"
+                    Point3="127.333333333333,23.5789473684211" />
+                  <mssgle:LineSegment
+                    End="127.333333333333,40.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Get CA_ELEM for delete.Paths[Data Conversion Output]"
+          TopLeft="465,135">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30"
+              Start="0,0"
+              End="0,22.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Get CA_ELEM for delete\Load CaElem SQL0">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Get CA_ELEM for delete\Get CaElem for Delete">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Get Distinct FB_ID">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="166,42"
+          Id="Package\Get Distinct FB_ID\Get distinct FB_ID"
+          TopLeft="253,20" />
+        <NodeLayout
+          Size="189,42"
+          Id="Package\Get Distinct FB_ID\Insert DeleteFbId SQL0"
+          TopLeft="163,253" />
+        <NodeLayout
+          Size="142,42"
+          Id="Package\Get Distinct FB_ID\Convert FBID"
+          TopLeft="269,104" />
+        <NodeLayout
+          Size="120,42"
+          Id="Package\Get Distinct FB_ID\Multicast"
+          TopLeft="288,177" />
+        <EdgeLayout
+          Id="Package\Get Distinct FB_ID.Paths[OLE DB Source Output]"
+          TopLeft="338,62">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42"
+              Start="0,0"
+              End="0,34.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Get Distinct FB_ID.Paths[Multicast Output 1]"
+          TopLeft="329.333333333333,219">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-71.8333333333333,34"
+              Start="0,0"
+              End="-71.8333333333333,26.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.86842105263157" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9.86842105263157"
+                    Point2="0,13.8684210526316"
+                    Point3="-4,13.8684210526316" />
+                  <mssgle:LineSegment
+                    End="-67.8333333333333,13.8684210526316" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-67.8333333333333,13.8684210526316"
+                    Point2="-71.8333333333333,13.8684210526316"
+                    Point3="-71.8333333333333,17.8684210526316" />
+                  <mssgle:LineSegment
+                    End="-71.8333333333333,26.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Get Distinct FB_ID.Paths[Data Conversion Output]"
+          TopLeft="340,146">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="8,31"
+              Start="0,0"
+              End="8,23.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11.5"
+                    Point2="0,15.5"
+                    Point3="4,15.5" />
+                  <mssgle:LineSegment
+                    End="4,15.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="4,15.5"
+                    Point2="8,15.5"
+                    Point3="8,19.5" />
+                  <mssgle:LineSegment
+                    End="8,23.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Get Distinct FB_ID\Get distinct FB_ID">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Get Distinct FB_ID\Insert DeleteFbId SQL0">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Get FbLn for delete">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="195,42"
+          Id="Package\Get FbLn for delete\Get Distinct FbId and LN"
+          TopLeft="354,6" />
+        <NodeLayout
+          Size="160,42"
+          Id="Package\Get FbLn for delete\DeleteFbLn SQL0"
+          TopLeft="213,267" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Get FbLn for delete\Data Conversion"
+          TopLeft="363,91" />
+        <NodeLayout
+          Size="120,42"
+          Id="Package\Get FbLn for delete\Multicast"
+          TopLeft="367,175" />
+        <EdgeLayout
+          Id="Package\Get FbLn for delete.Paths[OLE DB Source Output]"
+          TopLeft="451.5,48">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-10.5,43"
+              Start="0,0"
+              End="-10.5,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.5"
+                    Point2="0,21.5"
+                    Point3="-4,21.5" />
+                  <mssgle:LineSegment
+                    End="-6.5,21.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-6.5,21.5"
+                    Point2="-10.5,21.5"
+                    Point3="-10.5,25.5" />
+                  <mssgle:LineSegment
+                    End="-10.5,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Get FbLn for delete.Paths[Multicast Output 1]"
+          TopLeft="408.333333333333,217">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-115.333333333333,50"
+              Start="0,0"
+              End="-115.333333333333,42.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.3947368421053" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.3947368421053"
+                    Point2="0,20.3947368421053"
+                    Point3="-4,20.3947368421053" />
+                  <mssgle:LineSegment
+                    End="-111.333333333333,20.3947368421053" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-111.333333333333,20.3947368421053"
+                    Point2="-115.333333333333,20.3947368421053"
+                    Point3="-115.333333333333,24.3947368421053" />
+                  <mssgle:LineSegment
+                    End="-115.333333333333,42.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Get FbLn for delete.Paths[Data Conversion Output]"
+          TopLeft="441,133">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-14,42"
+              Start="0,0"
+              End="-14,34.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17"
+                    Point2="0,21"
+                    Point3="-4,21" />
+                  <mssgle:LineSegment
+                    End="-10,21" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-10,21"
+                    Point2="-14,21"
+                    Point3="-14,25" />
+                  <mssgle:LineSegment
+                    End="-14,34.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Get FbLn for delete\Get Distinct FbId and LN">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Get FbLn for delete\DeleteFbLn SQL0">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
